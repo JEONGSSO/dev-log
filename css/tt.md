@@ -33,16 +33,3 @@ dsajkjflkdj
 ```shell
 $ brew dsjfljdsal
 ```
-
-
-```php
-// 연관 배열
-
-$a = [
-   'a' => 'aaa',
-   'b' => 'bbb'
-];
-
-$a['a']
-
-```
