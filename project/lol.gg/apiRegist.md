@@ -9,6 +9,24 @@
 }
 ```
 
+```md
+-.storybook (테스트)
+-src  
+   - frontend
+      - components
+      - config
+      - modules(공통 모듈사용)
+      index.js
+   - backend
+      - config
+test
+   Enzyme Test JS Files
+.babelrc
+.package.json
+.webpack base, dev, prod
+
+```
+
 ## 롤 개발자 api 등록하기 https://developer.riotgames.com/
 
 롤 개발자 사이트를 들어가서 아이디와 비밀번호를 입력하고 들어가서
