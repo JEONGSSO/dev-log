@@ -30,3 +30,5 @@ regist product 클릭
 확인을 누르면 1~2주 사이에 허가를 내주는데, 인증정보를 확인하려면
 
 ![alt](/screenshot/45.jpg)
+
+에서 확인
