@@ -27,7 +27,7 @@ commit ~~ (HEAD -> master, tag: test, origin/master, origin/HEAD)
 
 // 로컬에만 저장된 태그를 repo로 푸쉬.
 git push origin test
-
+ 
 ```
 
 tag의 장점은 checkout할 경우 tag id로도 가능하다는 것입니다.
