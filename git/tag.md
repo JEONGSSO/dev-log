@@ -36,3 +36,6 @@ tag의 장점은 checkout할 경우 tag id로도 가능하다는 것입니다.
 git checkout test
 ```
 test tag로 체크아웃!
+
+출처 : https://mr-dan.tistory.com/48
+https://backlog.com/git-tutorial/kr/stepup/stepup4_1.html
