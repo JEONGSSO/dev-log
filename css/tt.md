@@ -21,9 +21,10 @@
 [**naver**](naver.com)
 
 
-|-|-|
-|dfs|dsfjlk|
-|dfs|sdfAS|
+| -   | -      |
+| --- | ------ |
+| dfs | dsfjlk |
+| dfs | sdfAS  |
 
 
 ```javscript
