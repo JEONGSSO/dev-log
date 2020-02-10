@@ -62,4 +62,4 @@ var ctx = canvas.getContext('2d'); // 드로잉 컨텍스트에 엑세스
 초기 로딩 시에는 비어있고
 body가 로드되면 draw()함수를 통해 캔버스에 그림을 그린다.
 
-출처: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/canvas
+출처 및 더 알아보기: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/canvas
