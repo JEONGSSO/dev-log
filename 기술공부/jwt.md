@@ -79,3 +79,5 @@ AT의 만료시간을 늘려주는 것이다.
 - Stateless: JWT는 상태를 저장하지 않기 때문에, 한 번 만들면 제어(삭제, 수정)가 불가능하기때문에 만료시간을 "꼭" 넣어야 한다.
 - Tore Token: 토큰은 클라이언트에서 관리해야 하기 때문에, 토큰을 저장해야 한다.
 
+참조 : https://mangkyu.tistory.com/56
+http://tlog.tammolo.com/blog/jwt/
