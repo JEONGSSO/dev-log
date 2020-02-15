@@ -1,4 +1,4 @@
-# Tailwind란? 
+# Tailwind란?
 
 부트스트랩, 구글 머터리얼 디자인 같은 css 프레임워크이다.
 
@@ -13,3 +13,20 @@
 사이트: https://tailwindcss.com/
 
 출처: https://jsonobject.tistory.com/493
+
+npm i tailwind autoprefixer postcss-loader 설치 후
+
+root폴더에 postcss.config.js 파일을 만든 후
+
+module.exports = {
+plugins: [
+require('tailwindcss'),
+require('autoprefixer'),
+]
+}
+
+종속성을 주고
+
+웹팩에서 로더를 사용하고 있으면
+
+웹팩 css-loader, scss-loader , postcss-loader 로더를 만들어주면 된다.
