@@ -106,7 +106,7 @@ npm run build -> outDir에서 지정해준 폴더에 컴파일 된 파일이 생
    const arr:number[] = [1,2,3,4,5];
    const arrSum = (x: number[]): number => x.reduce((val: number, initVal: number) => initVal + val);
    
-   //리턴하는 역할의 함수가 아닐때
+   리턴하는 역할의 함수가 아닐때
    const voidReturn = (): void => {
       console.log('good')
    }
@@ -116,5 +116,51 @@ npm run build -> outDir에서 지정해준 폴더에 컴파일 된 파일이 생
       console.log('good')
    }
 
+
+```
+
+---
+## interface사용하기
+
+```ts
+interface Shape {
+  getArea(): number;
+}
+
+class Circle implements Shape {
+  constructor(radius: number) {
+    this.radius = radius;
+  }
+  
+  radius: number;
+
+  getArea() {
+    return this.radius * this.radius * Math.PI;
+  }
+
+}
+
+const shapes: Shape[] = [new Circle(5)];
+
+shapes.map(v => console.log(v.getArea())) // 5 * 5 * 3.14...  7.85...
+
+constructor에 radius선언하고 밑에 radius를 다시 선언해야 했는데 여기서 접근자 키워드를 사용하면 (private, public)
+constructor에서만 한번 선언하면 된다.
+
+class Circle implements Shape {
+  constructor(private radius: number) { //private로 circle 클래스 내에서만 참조할 수 있게 선언.
+    this.radius = radius;
+  }
+  
+  // radius: number; 요건 지워도 된다.
+
+  getArea() {
+    return this.radius * this.radius * Math.PI;
+  }
+}
+
+const circle = new Circle(5);
+
+console.log(circle.radius) // private 접근자로 에러발생.
 
 ```
