@@ -45,7 +45,7 @@
 
 ```
 
-## 이터러블 프로토콜을 따른 map의 다형성
+## 이터러블 프로토콜을 따른 map의 다형성 1
 
 ```js
    const = nodeEl = document.querySelectorAll('*');
@@ -74,4 +74,85 @@ ecma script에서 계속 이터러블 프로토콜을 따르게 만들어질텐�
 
 프로토 타입기반, 클래스 기반으로 사용하는 방법보다 유연성이 좋아진다고 말할수 있다.
 
+---
+## 이터러블 프로토콜을 따른 map의 다형성2
+
+```js
+   const a = new Map();
+   a.set('a', 10);
+   a.set('b', 20);
+   console.log(a) // Map(2) {"a" => 10, "b" => 20}
+   a[Symbol.iterator](); // MapIterator {"a" => 10, "b" => 20}
+   
+   let iter = a[Symbol.iterator]();
+   iter.next(); // {value: Array(2), done: false}
+   iter.next(); // {value: Array(2), done: false}
+   iter.next(); // {value: undefined, done: true}
+
+   // 이터레이터가 존재하므로 위에서 만든 map함수 등등을 사용가능
+
+   // next값이 Array로 들어오기때문에 구조분해할당 [k, v]을 사용.
+   map(([k, v]) => [k, v + 10] , a) // [Array(2), Array(2)]
+
+   const newMap = new Map(map(([k, v]) => [k, v + 10] , a)) // 이렇게 안쪽 값이 바뀐 새로운 맵객체를 만들수 있다.
+   console.log(newMap) // Map(2) {"a" => 20, "b" => 30}
+```
+
+---
 ## filter
+
+```js
+   const filter = (f, iter) => {
+      const arr = [];
+      for (const v of iter) {
+         if (f(v)) arr.push(v);
+      }
+      return arr;
+   };
+
+   console.log(fp.filter(a => a.price > 20000, products)); // [Object, Object]
+   console.log(...fp.filter(a => a.price > 20000, products)); // Object {name: "후드티", price: 30000} Object {name: "바지", price: 25000}
+
+console.log(fp.filter(a => a % 2, function *() {
+   yield 1;
+   yield 2;
+   yield 3;
+}() )) // 즉시 실행 함수로 제너레이터 함수를 실행 yield 값을 필터링 가능
+```
+
+---
+## reduce 
+
+```js
+   const reduce = (f, acc, iter) => {
+      if (!iter) {
+         iter = acc[Symbol.iterator]();
+         acc = iter.next().value;
+      }
+
+      for (const v of iter) {
+         acc = f(acc, v);
+      }
+      return acc;
+   };
+
+   const reduce2 = (f, iter, acc) => { 
+      if (acc === undefined) { // acc 초기값을 넘기지 않으면 iter에서 맨 앞에 값이 초기값으로 들어감. 
+         iter = iter[Symbol.iterator]();
+         acc = iter.next().value;
+      }
+
+      for (const v of iter) {
+         acc = f(acc, v);
+      }
+      return acc;
+   };
+
+// 모든 물품의 가격 더하기
+console.log(reduce2((a, b) => a + b.price, products, 0)); // 105000
+console.log(reduce2((a, b) => a + b.price, products)); // [object Object]1500020000150003000025000 초기값이 숫자가 아니고 [object Object]라 스트링으로 연결되어 나옴
+
+console.log(reduce2((a, b) => a + b, [1, 2, 3])); // 6
+console.log(reduce2((a, b) => a + b, [2, 3], 1); // 6 
+
+```
