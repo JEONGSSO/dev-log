@@ -156,3 +156,45 @@ console.log(reduce2((a, b) => a + b, [1, 2, 3])); // 6
 console.log(reduce2((a, b) => a + b, [2, 3], 1); // 6 
 
 ```
+
+---
+## map, reduce, filter 조합조합, 함수형 사고
+
+```js
+
+const add = (a, b) => a + b;
+
+// product에서 20000원 초과의 가격들을 더하자
+
+// product를 통해서 add를 log에 출력
+console.log(reduce2(
+   add,  // 여기까지는 아무생각없이 타이핑이 가능.
+
+))
+
+console.log(reduce2(
+   add,
+   [10, 20, 30] // 숫자가 들어있는 배열로 평가되도록 만들어주면 되는구나 생각하게 되고
+)) 
+
+console.log(reduce2(
+   add,
+   map(p => p.price, product) // products역시 특정 조건(여기서는 price)만 남기면 되겠다 라고 생각하게 됨.
+))
+
+console.log(reduce2(
+   add,
+   filter(a => a.price > 20000, map(p => p.price, products)) //map으로 뽑은 숫자들의 배열을 filter함수가 필터링하게 넘김
+))
+
+// 맨 처음에는 filter를 가장먼저 사용해서 배열을 걸러내고 했는데 filter에서 ttt 보조함수 같이 p.price가 종속적으로 붙어서 다형성있는 보조함수를 사용하기 힘들었다.
+const ttt = a => a.price > 20000; // a.price가 붙어 종속적이게 됨.
+console.log(
+  reduce2(add, map(p => p.price, filter(ttt, dummyData.products)));
+)
+
+const filterr = a => a > 20000; // 인자 a를 그대로 사용하기 때문에 값만 제대로 넘어오면 잘 작동함. 
+console.log(
+  reduce2(add, filter(filterr, map(p => p.price, products))); // 지금은 단순하게 리스트만 뽑아내려고 하는거니까 map을 통해, 가격을 뽑아내고, filterr 보조함수로 인자를 그대로 연산할 수 있게되었다.
+);
+```
