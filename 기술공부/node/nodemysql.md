@@ -109,3 +109,13 @@ node utils에 promisify로 감싼 리턴 값을 사용해주면 따로 구현하
    conn.release() //릴리즈 db 연결을 끊어줌
 
    ```
+
+## 트랜잭션 Lock
+
+Lock wait timeout exceeded; try restarting transaction
+
+트랜잭션이 묶여서 진행이 안되는 상태인데
+
+서버를 다시시작 하거나, 해당 트랜잭션 id를 kill해주면 된다.
+
+https://www.popit.kr/mysql-lock-%EC%83%81%ED%99%A9-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/
