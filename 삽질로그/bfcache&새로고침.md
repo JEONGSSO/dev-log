@@ -27,6 +27,7 @@ window.onpageshow = function(event) {
 ## event.persisted
 [BFCache](https://www.google.com/search?q=bfcache&oq=bfcache&aqs=chrome..69i57j69i64j0l5&sourceid=chrome&ie=UTF-8)라고 브라우저가 빠른 로딩을 위해 해당 페이지의 정보를
 기억해놓았다가 꺼내는 방식인데 이 캐시를 사용하게되면 document.ready 타지 않는다.
+
 즉 다시 페이지를 그리는게 아니라 이전꺼를 그대로 갔다 쓰기 때문에 최신화를 해줘야하는 곳이있다면 유용하게 사용할 수 있따.
 
 아이폰 사파리에서 뒤로가기시에 아주 유용하게 사용할 수 있다.
