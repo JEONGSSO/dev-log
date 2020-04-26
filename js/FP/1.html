@@ -1,0 +1,82 @@
+<script src="./fp.js"></script>
+
+<script>
+  //util
+  const log = console.log;
+  const getTime = new Date().getTime();
+</script>
+
+<script>
+  // const obj = {
+  //   time: getTime,
+  //   fin: 'N',
+  //   finn: 'Y',
+  // };
+
+  // const queryStr = (obj) =>
+  // go(
+  //   obj,
+  //   Object.entries,
+  //   map(([k, v]) => `${k}=${v}`),
+  //   reduce((a, b) => `${a}&${b}`),
+  //   log
+  // );
+
+  // const queryStr = pipe(
+  //   Object.entries,
+  //   map(([k, v]) => `${k}=${v}`),
+  //   reduce((a, b) => `${a}&${b}`)
+  // );
+
+  // console.log(queryStr(obj));
+
+  const array = [
+    {
+      name: 'kim',
+      age: 18,
+      from: 'Korea',
+    },
+    {
+      name: 'john',
+      age: 20,
+      from: 'UK',
+    },
+    {
+      name: 'andreas',
+      age: 19,
+      from: 'Spain',
+    },
+    {
+      name: 'mike',
+      age: 29,
+      from: 'USA',
+    },
+    {
+      name: 'francesco',
+      age: 25,
+      from: 'Italy',
+    },
+  ];
+
+  const ageUnder20 = (arr) =>
+    go(
+      arr,
+      filter((v) => v.age <= 20),
+      take(3),
+      log
+    );
+  console.time('s');
+  ageUnder20(array);
+  console.timeEnd('s');
+
+  const LageUnder20 = (arr) =>
+    go(
+      arr,
+      lFilter((v) => v.age <= 20),
+      take(Infinity),
+      log
+    );
+  console.time('L');
+  LageUnder20(array);
+  console.timeEnd('L');
+</script>
