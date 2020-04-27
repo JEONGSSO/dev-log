@@ -108,25 +108,26 @@ DB 조회나, HTTP요청 등 시간비용이 큰 작업들은 다른 스레드�
    const _async = (fn) => {
       return function() {
          arguments[arguments.length++] = function(result) { // (1)
-            _callback(result) // (6)
-         }
+            _callback(result); // (6)
+         }; // 여기서 세미콜론 안하면 _callback not function 에러 난다.
+
          (function wait(args) {
             // 새로운 공간 추가
             for (let i = 0; i < args.length; i++) 
                if (args[i] && args[i].name == '_async_cb_receiver') 
-                  return args[i]((arg) => {args[i] = arg; wait(args)} )
+                  return args[i]((arg) => { args[i] = arg; wait(args); })
             fn.apply(null, args)
          })(arguments)
 
-         // 변경된 부분 fn.apply(null, arguments) // (2)
-
-         var _callback; // (3)
-         function _async_cb_receiver(cb) { // (4)
-            _callback = cb // (5)
+         var _callback;    
+         function _async_cb_receiver(callback) {
+            _callback = callback;
          }
-         return _async_cb_receiver
+        return _async_cb_receiver;
       }
    }
+
+
 
 ```
 _async
