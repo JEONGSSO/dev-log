@@ -187,3 +187,116 @@ Promise.all([promiseAdd10(5), promiseAdd100(5)])
       console.log(r1, r2) // 약 1초뒤 15, 105
 })
 ```
+---
+
+### rejected
+
+reject는 일반적으로 예외, 에러 상황에서 발생.
+then의 두 번째 함수 rejected 함수와 catch로 처리할 수 있는데
+rejected가 안좋은 점이 있다.
+
+```js
+   const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => reject('reject: p1'), 3000);
+})
+const p2 = (param) => new Promise(resolve => {
+  setTimeout(() => resolve(`${param}, resolve: p2`), 5000);
+});
+
+p1.then(r1 => {
+  console.log('after p1 resolve');
+  return p2(r1);
+}, e1 => {
+  console.log('after p1 reject');
+  console.log(e1);
+}).then(r2 => {
+  console.log('after p2 resolve');
+  console.log(r2);
+}, e2 => {
+  console.log('after p2 reject');
+});
+
+```
+
+출력 after p1 reject -> reject: p1 -> after p2 resolve -> undefined
+
+대게 에러나 예외가 나면 그 부분을 제외하고 출력하거나 건너뛰는것을 생각할 수 있는데
+
+after p1 reject -> reject: p1
+
+혹은
+
+after p1 reject -> reject: p1 -> after p2 reject -> ...
+
+처럼 rejected는 undefined가 나와도 그대로 진행하게 되어있다 그래서...
+
+
+#### catch
+
+```js
+   const p1 = new Promise((resolve, reject) => {
+      setTimeout(() => reject('reject: p1'), 3000);
+   })
+   const p2 = new Promise(resolve => {
+      setTimeout(() => resolve("resolve: p2"), 5000);
+   });
+
+   p1.then(r1 => {
+      console.log('after p1 resolve');
+      return p2(r1);
+   })
+   .then(r2 => {
+      console.log('after p2 resolve');
+      console.log(r2);
+   })
+   .catch(e => {
+      console.log('after reject');
+      console.log(e);
+   })
+
+   // p1에서 reject를 콜백(?)으로 실행하기 때문에 catch로 넘어온다
+   // 출력 reject: p1 -> after reject
+```
+
+#### reject말고 catch를 권장하는 이유
+
+1. 예외 처리 같은 reject 로직을 뒤에서 작성할 수 있습니다.
+2. 중간에 섞인 rejected 함수 사용 로직보다 가독성이 좋다
+3. reject 상황을 뒤에 배치하여 then 체이닝으로 이어서 로직 작성 가능
+4. 무엇보다 then fulilled 로직에서 발생하는 에러를 잡아줄 수 있다.
+
+``` js 
+//4 번 예시
+   const pp1 = new Promise((resolve, reject) => {
+      setTimeout(() => resolve('resolve: p1'), 3000);
+   })
+
+   pp1.then(r1 => {
+    console.log(r1)
+      }).then(r2 => { //resolve에서 에러가 났을때 throw catch에게 던져 대처가 가능하다.
+         throw new Error('error') 
+         console.log(r2)
+      }).catch(e => {
+         console.log('errrrrrrrrrrrr')
+      })
+
+      // 출력 resolve: p1 -> errrrrrrrrrrrr
+```
+
+### async / await
+
+ES8부터 적용된 비동기 처리방식
+
+```js
+   const test = async(id) => {
+      const userList = await db.query('select * from userlist where id = ?', id);
+      //시간 비용이 큰 작업 앞에 await를 붙여주면 된다.
+   }
+   test(123) //
+   console.log(test(10)) // Promise
+
+```
+
+[MDN async function 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/async_function)
+
+참고 https://velog.io/@thsoon/JS-%EB%B9%84%EB%8F%99%EA%B8%B0%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B5%AC%ED%98%84%EB%90%98%EC%96%B4%EC%9E%88%EB%8A%94%EA%B0%80
