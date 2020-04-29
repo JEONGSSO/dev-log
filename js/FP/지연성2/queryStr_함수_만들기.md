@@ -15,7 +15,7 @@ const queryStr = (obj) =>
     obj,
     Object.entries,
     fp.map(([k, v]) => `${k}=${v}`),
-    fp.reduce2((a, b) => `${a}&${b}`),
+    fp.reduce((a, b) => `${a}&${b}`),
     log
   );
 
@@ -25,7 +25,7 @@ const queryStr = (obj) =>
 const queryStr = fp.pipe(
   Object.entries,
   fp.map(([k, v]) => `${k}=${v}`),
-  fp.reduce2((a, b) => `${a}&${b}`),
+  fp.reduce((a, b) => `${a}&${b}`),
   log
 );
 
