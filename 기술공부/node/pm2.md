@@ -23,7 +23,6 @@ pm2 monit // 모니터링 기능
 
 모든 CPU를 사용하기 위해서는 모드를 cluster로 실행해야 한다.
 
-
 ```
 
 하지만 cluster 환경에서 node js 모듈인 socket io는 정상 작동하지 않는다  
@@ -32,5 +31,10 @@ pm2 monit // 모니터링 기능
 이런 부분을 해소 하기위해서 redis서버와 redis 모듈을 설치 한 후 socket 정보들을  
 redis에서 공유 할 수 있도록 해주면 cluster 환경에서도 적상적인 socket io를  
 사용 할 수 있다
+
+socket io 공식문서에 소개된 socket.io-redis 라이브러리를 사용하면 될 것 같다.
+
+downtime이 없게 하려면 socket의 sessionid를 redis에 저장하여 세션을 비교해
+disconnect()를 할지 next()로 유지할지 판단.
 
 출처: [https://hjw1456.tistory.com/1](https://hjw1456.tistory.com/1) \[끄적이는공간\]
