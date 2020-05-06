@@ -13,7 +13,7 @@ app에서 남기는 로그 처리, 프로세스가 죽었을때 (restart 등), �
 pm2 list // 리스트 id, name등등 표시
 pm2 start // 실행
 pm2 stop [id, name ...] // 스톱
-
+pm2 reload // 무중단 재로드 (소켓은 끊겼다가 연결됨)
 pm2 monit // 모니터링 기능
 
 보통 nodejs가 하나만 실행되는데 cluster 모드로 여러개의 nodejs를 실행가능
@@ -34,7 +34,8 @@ redis에서 공유 할 수 있도록 해주면 cluster 환경에서도 적상적
 
 socket io 공식문서에 소개된 socket.io-redis 라이브러리를 사용하면 될 것 같다.
 
-downtime이 없게 하려면 socket의 sessionid를 redis에 저장하여 세션을 비교해
-disconnect()를 할지 next()로 유지할지 판단.
+https://stackoverflow.com/questions/40824943/node-js-app-deployment-using-pm2-without-downtime
+https://stackoverflow.com/questions/18039664/nodejs-socket-io-change-connection-fast
+방법들 시도해봐야겠다.
 
 출처: [https://hjw1456.tistory.com/1](https://hjw1456.tistory.com/1) \[끄적이는공간\]
