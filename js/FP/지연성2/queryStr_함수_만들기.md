@@ -25,11 +25,55 @@ const queryStr = (obj) =>
 const queryStr = fp.pipe(
   Object.entries,
   fp.map(([k, v]) => `${k}=${v}`),
-  fp.reduce((a, b) => `${a}&${b}`),
+  fp.reduce((a, b) => `${a}&${b}`), // join 역할
   log
 );
 
 queryStr(obj);
 
 // limit=10&offset=10&type=notice
+```
+
+Array.prototype.join 보다 다형성 높은 join 함수 만들기
+
+```js
+
+const join = curry((sep = ',', iter) => reduce((a, b) => `${a}${sep}${b}`, iter))
+
+const queryStr = fp.pipe(
+  Object.entries,
+  fp.map(([k, v]) => `${k}=${v}`),
+  join('&'),
+  log
+);
+
+// limit=10&offset=10&type=notice
+
+// 다형성
+function *a() {
+  yield 10;
+  yield 11;
+  yield 12;
+  yield 13;
+}
+
+a().join() // 안 됨
+
+join(', ', a()) // 10, 11, 12, 13
+
+// join도 iter 프로토콜을 따르고 있기 때문에
+
+const queryStr = fp.pipe(
+  Object.entries,
+  fp.lMap(([k, v]) => `${k}=${v}`),
+  join('&'),
+  log
+);
+
+// 지연된 계산도 가능하다.
+
+// 이렇게 Array에서만 사용할 수 있는 join 함수를
+// 이터러블 프로토콜을 사용하는 함수는 사용 가능하게 구현을 하였다.
+
+
 ```

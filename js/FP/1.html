@@ -7,76 +7,75 @@
 </script>
 
 <script>
-  // const obj = {
-  //   time: getTime,
-  //   fin: 'N',
-  //   finn: 'Y',
-  // };
+  // const array = [
+  //   {
+  //     name: 'kim',
+  //     age: 18,
+  //     from: 'Korea',
+  //   },
+  //   {
+  //     name: 'john',
+  //     age: 20,
+  //     from: 'UK',
+  //   },
+  //   {
+  //     name: 'andreas',
+  //     age: 19,
+  //     from: 'Spain',
+  //   },
+  //   {
+  //     name: 'mike',
+  //     age: 29,
+  //     from: 'USA',
+  //   },
+  //   {
+  //     name: 'francesco',
+  //     age: 25,
+  //     from: 'Italy',
+  //   },
+  // ];
 
-  // const queryStr = (obj) =>
-  // go(
-  //   obj,
-  //   Object.entries,
-  //   map(([k, v]) => `${k}=${v}`),
-  //   reduce((a, b) => `${a}&${b}`),
-  //   log
-  // );
+  // const ageUnder20 = (arr) =>
+  //   go(
+  //     arr,
+  //     filter((v) => v.age <= 20),
+  //     take(3),
+  //     log
+  //   );
+  // console.time('s');
+  // ageUnder20(array);
+  // console.timeEnd('s');
 
-  // const queryStr = pipe(
-  //   Object.entries,
-  //   map(([k, v]) => `${k}=${v}`),
-  //   reduce((a, b) => `${a}&${b}`)
-  // );
+  // const LageUnder20 = (arr) =>
+  //   go(
+  //     arr,
+  //     lFilter((v) => v.age <= 20),
+  //     take(Infinity),
+  //     log
+  //   );
+  // console.time('L');
+  // LageUnder20(array);
+  // console.timeEnd('L');
 
-  // console.log(queryStr(obj));
+   const obj = {
+    time: getTime,
+    fin: 'N',
+    finn: 'Y',
+  };
 
-  const array = [
-    {
-      name: 'kim',
-      age: 18,
-      from: 'Korea',
-    },
-    {
-      name: 'john',
-      age: 20,
-      from: 'UK',
-    },
-    {
-      name: 'andreas',
-      age: 19,
-      from: 'Spain',
-    },
-    {
-      name: 'mike',
-      age: 29,
-      from: 'USA',
-    },
-    {
-      name: 'francesco',
-      age: 25,
-      from: 'Italy',
-    },
-  ];
+  const lEntries = function *(obj) {
+    for (const key in obj) yield [key, obj[key]]
+  }
 
-  const ageUnder20 = (arr) =>
-    go(
-      arr,
-      filter((v) => v.age <= 20),
-      take(3),
-      log
-    );
-  console.time('s');
-  ageUnder20(array);
-  console.timeEnd('s');
+  const join = curry((sep = ',', iter) => reduce((a, b) => `${a}${sep}${b}`, iter))
 
-  const LageUnder20 = (arr) =>
-    go(
-      arr,
-      lFilter((v) => v.age <= 20),
-      take(Infinity),
-      log
-    );
-  console.time('L');
-  LageUnder20(array);
-  console.timeEnd('L');
+  const queryStr = pipe(
+    lEntries,
+    lMap(([k, v]) => `${k}=${v}`),
+    join('&')
+  );
+
+  console.log(queryStr(obj))
+
+
 </script>
