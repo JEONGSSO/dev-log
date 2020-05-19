@@ -79,6 +79,13 @@ const lFilter = curry(function* (f, iter) {
   for (const a of iter) if (f(a)) yield a;
 });
 
+const find = (f, iter) => go(
+  iter,
+  filter(f),
+  take(1),
+  ([a]) => a
+)
+
 // export default {
 //   map,
 //   filter,

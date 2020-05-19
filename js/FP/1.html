@@ -57,25 +57,35 @@
   // LageUnder20(array);
   // console.timeEnd('L');
 
-   const obj = {
-    time: getTime,
-    fin: 'N',
-    finn: 'Y',
-  };
+  //  const obj = {
+  //   time: getTime,
+  //   fin: 'N',
+  //   finn: 'Y',
+  // };
 
-  const lEntries = function *(obj) {
-    for (const key in obj) yield [key, obj[key]]
-  }
+  // const lEntries = function *(obj) {
+  //   for (const key in obj) yield [key, obj[key]]
+  // }
 
-  const join = curry((sep = ',', iter) => reduce((a, b) => `${a}${sep}${b}`, iter))
+  // const join = curry((sep = ',', iter) => reduce((a, b) => `${a}${sep}${b}`, iter))
 
-  const queryStr = pipe(
-    lEntries,
-    lMap(([k, v]) => `${k}=${v}`),
-    join('&')
-  );
+  // const queryStr = pipe(
+  //   lEntries,
+  //   lMap(([k, v]) => `${k}=${v}`),
+  //   join('&')
+  // );
 
-  console.log(queryStr(obj))
+  // console.log(queryStr(obj))
 
+  const users = [
+    {age: 20}, 
+    {age: 21}, 
+    {age: 22}, 
+    {age: 23}, 
+    {age: 24}, 
+    {age: 25},
+  ]
+
+  console.log(filter(a => a.age > 22, users))
 
 </script>
