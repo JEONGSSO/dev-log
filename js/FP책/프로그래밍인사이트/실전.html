@@ -1,6 +1,6 @@
 <script src="../../FP/fp.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 <div id="root">
   <button class="remove">sadsad</button>
   <ul class="item_list">
@@ -29,11 +29,32 @@
     pipe(
       () => $('#root .item_list input:checked'),
       map((a) => parseInt(a.closest('li').dataset.item_id)),
-      map((a) =>
-        $.ajax(`http://localhost:3002/item/${a}`, 'delete').catch((e) =>
+      map((id) =>
+        $.ajax(`http://localhost:9999/item/${id}`, 'delete').catch((e) =>
           console.log(e)
         )
       )
     )
   );
+
+  wrap_arr = (v) => (v instanceof Array ? v : [v]);
+  Tobject = (arr, f) => map(f, arr);
+  const sql = {};
+
+  sql.insert = (table, data) => {
+    data = wrap_arr(data);
+    const columns = go(data, map(_.keys), _.flatten, _.uniq);
+    const initValue = Tobject(columns, (k) => {
+      return { [k]: 'default' };
+    });
+    const sql_values = map((v) => _.values(v), data);
+    return `insert into ${table} (${columns.join(
+      '","'
+    )}") values (${sql_values})`;
+  };
+
+  console.log(
+    sql.insert('user', [{ a: 1, b: 2 }, { x: 9 }, { desc: '설명', x: 10 }])
+  );
+  // insert into table values
 </script>
