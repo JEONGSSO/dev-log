@@ -4,15 +4,20 @@
 <div id="root"></div>
 
 <style>
-   .confirm {background-color: antiquewhite;}
+  .confirm {
+    background-color: antiquewhite;
+  }
 </style>
 
 <script>
-const $root = $('#root')
-const Ui = {};
+  const $root = $('#root');
+  const Ui = {};
 
-Ui.confirm = (msg, selectEl) => go(
-   `
+  const find = (f, iter) => go(iter, filter(f), take(1), ([a]) => a);
+
+  Ui.confirm = (msg, selectEl) =>
+    go(
+      `
       <div class="confirm">
          <div class="body">
             <div class="msg">${msg}</div>
@@ -23,15 +28,17 @@ Ui.confirm = (msg, selectEl) => go(
          </div>
       </div>
    `,
-   html => selectEl.append(html),
-   a => a.find('button'),
-   a => a.click(({currentTarget}) => go(
-      currentTarget,
-      a => a.closest('.confirm'),
-      a => a.remove()
-   ))
-)
+      (html) => selectEl.append(html),
+      (a) => a.find('button'),
+      (a) =>
+        a.click(({ currentTarget }) =>
+          go(
+            currentTarget,
+            (a) => a.closest('.confirm'),
+            (a) => a.remove()
+          )
+        )
+    );
 
-Ui.confirm('삭제', $root)
+  Ui.confirm('삭제', $root);
 </script>
-

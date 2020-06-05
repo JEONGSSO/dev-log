@@ -1,3 +1,6 @@
+const L = {};
+const log = console.log;
+
 const curry = (f) => (a, ..._) =>
   _.length ? f(a, ..._) : (..._) => f(a, ..._);
 
@@ -17,25 +20,11 @@ const filter = curry((f, iter) => {
   return arr;
 });
 
-// const reduce = (f, acc, iter) => {
-//   if (!iter) {
-//     iter = acc[Symbol.iterator]();
-//     acc = iter.next().value;
-//   }
-
-//   for (const v of iter) {
-//     console.log('ttttttttttttt', iter);
-//     acc = f(acc, v);
-//   }
-//   return acc;
-// };
-
 const reduce = curry((f, iter, acc) => {
   if (acc === undefined) {
     iter = iter[Symbol.iterator]();
     acc = iter.next().value;
   }
-
   for (const v of iter) {
     acc = f(acc, v);
   }
@@ -55,13 +44,6 @@ const range = (num) => {
   return arr;
 };
 
-const lRange = function* (num) {
-  let i = -1;
-  while (++i < num) {
-    yield i;
-  }
-};
-
 const take = curry((l, iter) => {
   let res = [];
   for (const a of iter) {
@@ -71,20 +53,21 @@ const take = curry((l, iter) => {
   return res;
 });
 
-const lMap = curry(function* (f, iter) {
+L.range = function* (num) {
+  let i = -1;
+  while (++i < num) {
+    yield i;
+  }
+};
+
+L.map = curry(function* (f, iter) {
   for (const a of iter) yield f(a);
 });
 
-const lFilter = curry(function* (f, iter) {
+L.filter = curry(function* (f, iter) {
+  console.log(iter);
   for (const a of iter) if (f(a)) yield a;
 });
-
-const find = (f, iter) => go(
-  iter,
-  filter(f),
-  take(1),
-  ([a]) => a
-)
 
 // export default {
 //   map,

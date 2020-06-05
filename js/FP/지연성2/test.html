@@ -1,0 +1,15 @@
+<script src="../fp.js"></script>
+
+<script>
+  const ttmap = curry(pipe(L.map, take(Infinity)));
+
+  console.log(ttmap((a) => a + 10, range(10)));
+
+  //   go(
+  //     L.range(10),
+  //     L.map((a) => a + 10),
+  //     L.filter((a) => a % 2),
+  //     take(Infinity),
+  //     log
+  //   );
+</script>
