@@ -1,9 +1,67 @@
 <script src="../fp.js"></script>
 
 <script>
-    go(
-      [1,2,3,4,5],
-      map((a) => a + 10),
-      log
-    );
+    // go(
+    //   [1,2,3,4,5],
+    //   map((a) => a + 10),
+    //   log
+    // );
+
+    // 홀수 n개의 제곱의 합
+    
+    const arr = [1,2,3,4,5,6,7,8,9,10];
+    
+    // 명령형
+    const fn1 = (limit, list) => {
+      let sum = 0;
+      for (const a of list) {
+        if (a % 2) {
+          const b = a * a;
+          sum += b;
+        }
+        if (--limit === 0 ) break;
+      }
+      return sum;
+    }
+
+    // console.log(fn1(5, arr));
+
+    // 함셩
+
+    // if를 filter로
+    // 제곱을 map으로
+    // limit을 take로
+    // 상위스코프인 sum의 결과를 reduce로
+
+    // const fn2 = curry((limit, list) => 
+    //   go(
+    //     list,
+    //     filter(a => a % 2),
+    //     map(a => a * a),
+    //     take(limit),
+    //     reduce((acc, val) => acc + val),
+    //     log
+    //   ))
+
+    // console.log(range(1, 10 , 3))
+
+    // console.log(fn2(3, arr));
+
+    // const gugudan = (num) => {
+    //   go(
+    //     range(2, 10),
+    //     map(a => go(
+    //       range(1, 10),
+    //       map(b => `${a} X ${b} = ${a * b}`),
+    //       join('\n')
+    //       )),
+    //       join('\n\n'),
+    //       log
+    //   )
+    // }
+
+    // gugudan(5)
+
+
+
 </script>

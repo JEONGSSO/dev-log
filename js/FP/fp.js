@@ -52,14 +52,20 @@ const map = curry(pipe(L.map, takeAll));
 
 const filter = curry(pipe(L.filter, takeAll));
 
-const range = (num) => {
-  let i = -1;
+const range = (start, stop, step = 1) => {
   const arr = [];
-  while (++i < num) {
+  let i = stop ? start : 0;
+  stop = stop || start;
+  while (i < stop) {
     arr.push(i);
+    i += step;
   }
   return arr;
 };
+
+const join = curry((cus = ',', list) => 
+    reduce((pre, val) => `${pre}${cus}${val}`, list))
+
 
 // export default {
 //   map,
