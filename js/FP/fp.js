@@ -63,8 +63,8 @@ const range = (start, stop, step = 1) => {
   return arr;
 };
 
-const join = curry((cus = ',', list) => 
-    reduce((pre, val) => `${pre}${cus}${val}`, list))
+const join = curry((sep = ',', list) => 
+    reduce((pre, val) => pre+sep+val, list))
 
 
 // export default {
