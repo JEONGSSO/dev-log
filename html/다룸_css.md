@@ -56,6 +56,8 @@ inline style -> id -> class -> element
 
 ## css 선택자 사용 방식
 
+**OOCSS 권장** 
+
 공통 클래스를 놓고 각 엘리먼트에 세부 클래스를 추가하는 방식
 
 
