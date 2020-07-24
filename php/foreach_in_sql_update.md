@@ -18,3 +18,20 @@
 
 해결방안 모색 중...
 
+delete를 하고 그 후에 insert를 하여
+update를 한것처럼 구현을 하였다.
+
+```php
+   $sql = "
+      DELETE table WHERE idx > 0;
+   ";
+   $sth = $db->prepare($sql);
+   $sth->execute();
+
+   $sql = "
+      INSERT INTO (sort_no) VALUES (:index);
+   ";
+   $sth = $db->prepare($sql);
+   $sth->param(":index", $index);
+   $sth->execute();
+```
