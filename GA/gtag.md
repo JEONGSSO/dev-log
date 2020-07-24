@@ -23,5 +23,18 @@ head에 추가하는 이유는 사용자가 들어왔다 빠른시간안에 나�
 
 크롬 확장자 도구나, ga 웹페이지에서 확인할 수 있다.
 
+클릭 이벤트
+
+```js
+    function gaEventer(url, category, event) {
+      event = event || 'click';
+      url = url || location.pathname;
+      gtag('event', event, {
+            'event_category': category,
+            'event_url': url,
+      });
+    };
+```
+
 참고: https://analyticsmarketing.co.kr/digital-analytics/google-tag-manager-basics/3002/
 
