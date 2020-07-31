@@ -10,11 +10,6 @@
 ```js
 
 function lazyVideoLoader() {
-
-  var options = {threshold: .1}; // threshold .1 해당 엘리먼트가 몇 퍼센트 보여야 하는지 옵션 지정 지금은 10%
-  // 옵션은 threshold 말고도 rootMargin, root가 있다.
-
-  var callback = function (entries, observer) {
     var videoSrc = {
       'two': {
         m: "src"
@@ -26,6 +21,17 @@ function lazyVideoLoader() {
       }
     };
 
+  var renderVideo = function (className) {
+    var lazyContent = document.querySelectorAll('.video_contents.lazy.' + className);
+    var item = document.createElement('source');
+    item.src = videoSrc[className][is_mobile || 'pc'];
+    item.type = "video/mp4";
+    lazyContent[0].appendChild(item);
+  };
+
+  var options = {threshold: .1}; // threshold .1 해당 엘리먼트가 몇 퍼센트 보여야 하는지 옵션 지정 지금은 10%
+        // 옵션은 threshold 말고도 rootMargin, root가 있다.
+  var callback = function (entries, observer) {
     entries.forEach(function (entry) {
 
       // entry.isIntersecting option에 따른 boolean 값으로 option 만큼 보이면 true 생성됨 
@@ -35,9 +41,7 @@ function lazyVideoLoader() {
         observer.unobserve(entry.target);
 
         var targetClassName = entry.target.classList[2];
-        $('.video_contents.lazy.' + targetClassName).prepend(`
-          <source src="${videoSrc[targetClassName][is_mobile || 'pc']}" type="video/mp4">
-        `)
+        renderVideo(targetClassName);
       }
     });
   };
@@ -50,5 +54,4 @@ function lazyVideoLoader() {
   Array.from(lazyLoadingEl).forEach( function (el) {return observer.observe(el)});
 
 }
-
 ```
