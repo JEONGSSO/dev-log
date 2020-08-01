@@ -52,6 +52,13 @@ function lazyVideoLoader() {
   
   // Array.from은 nodeList(유사배열)을 Array.prototype 메소드를 사용가능하게 만들어준다. forEach로 각각 넣어주었다
   Array.from(lazyLoadingEl).forEach( function (el) {return observer.observe(el)});
+  //Array.from은 ie지원하지 않는다;
 
 }
 ```
+
+InterSectionObserver polyfill적용 하면서
+
+https://github.com/w3c/IntersectionObserver/tree/master/polyfill
+ie는 window에 InterSectionObserver 메소드가 없어서
+만들어주는 원리이다.
