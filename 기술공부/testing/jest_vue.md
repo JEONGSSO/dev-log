@@ -42,7 +42,61 @@ Vue와 같이 사용할 예정이므로 Vue에서 공식지원하는
 import { shallowMount } from '@vue-test-utils';
 import App from './App';
 
-const app = shallowMount(App); // App의
-const data = app.vm.$data; // vue의 data를 사용할 수 있다.
-const totalCount = app.find('.totalCount'); // 제이쿼리 처럼 app안의 class totalCount를 찾아줌
+// App.vue
+
+export default {
+  name: 'app',
+    // ...
+  data() {
+    return {
+      test: 'good',
+    };
+  },
+    //...
+};
+
+describe('Vue Test', () => {
+    // beforeEach(() => { // it 테스트 전에 정의할 값들을 만들때 좋다. DRY로 중복되는 코드를 한번에 쓰자.
+    //     ...
+    // });
+    it('얕은 마운트 data 접근 테스트', () => {
+        const wrapper = shallowMount(App);
+        const testValue = wrapper.vm.$data.test;
+        expect(testValue).toBe('good');
+    })
+})
+```
+
+Vue Router 연동 router-view 'name' 에러
+
+```js
+
+import VueRouter from 'vue-router';
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
+
+import App from '@/App.vue';
+import routes from '../../src/router/routes';
+
+const router = new VueRouter({ routes });
+const localVue = createLocalVue();
+localVue.use(VueRouter);
+
+describe('Vue Test', () => {
+    it('마운트 라우팅 push 테스트', async () => {
+        const wrapper = mount(App, {
+          localVue,
+          router,
+        });
+        router.push('/slider'); // 주소 이동
+        // async로 하는 이유 Vue의 반응성 시스템이 DOM을 업데이트한것을 확인하기 위해
+        await wrapper.vm.$nextTick(); // $nextTick 함수호출이 필요하다.
+
+        // 라우터가 변경되면 그에따라 타이틀 네임이 변하게 computed를 적용했다.
+        expect(wrapper.find('.header .title').text()).toBe('Slider');
+        // header title의 text가 Slider인지 확인
+
+      });
+})  
+
+
 ```
