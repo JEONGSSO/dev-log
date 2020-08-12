@@ -1,7 +1,7 @@
 # 기본적인 사용법
 
 ```js
-import socket from 'socket.io'
+import socket from 'js/기술공부/socket.io'
 
 socket.on('connection', {
    //연결이 된 후에
