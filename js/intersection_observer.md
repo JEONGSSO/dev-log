@@ -12,11 +12,11 @@
 function lazyVideoLoader() {
     var videoSrc = {
       'two': {
-        m: "src"
+        m: "src",
         pc: "src"
       },
       'gold_out': {
-        m: "src"
+        m: "src",
         pc: "src"
       }
     };
