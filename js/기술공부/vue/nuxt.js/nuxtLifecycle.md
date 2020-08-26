@@ -107,6 +107,7 @@ https://lavalite.org/blog/asyncdata-vs-fetch#:~:text=AsyncData%20is%20a%20method
 https://nuxtjs.org/blog/understanding-how-fetch-works-in-nuxt-2-12/
 
 **asyncData**
+
     - 구성 요소 데이터를 설정하기 전에 서버렌더링이 로드되기 전에 매번 호출
     - vuex 스토어에 접근하여 값 설정 할 수 있다.
     - pages 컴포넌트에서만 사용가능
@@ -115,6 +116,7 @@ https://nuxtjs.org/blog/understanding-how-fetch-works-in-nuxt-2-12/
     - data() 처럼 return 하여 사용  ex) return { mountains: ~~~ }
     
 **Fetch**
+
     - 렌더링하기 전에 스토어를 채우는데 사용, 컴포넌트의 data를 세팅하지 않는 점을 빼면 asyncData와 비슷.
     - vuex 스토어에 접근은 가능하지만 값 설정은 불가능
     - 모든 Vue 구성 요소에서 사용가능
