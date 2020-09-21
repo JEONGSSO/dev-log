@@ -3,6 +3,12 @@
 ##### 08.04 기준 베타 버전이기 때문에 바뀔 수 있음
 ##### IE 11부터 지원
 
+## 9월 19일 3 버전 릴리즈 됨.
+https://github.com/vuejs/vue-next/releases/tag/v3.0.0
+
+캡틴 판교님 vue3 훑어보기
+https://joshua1988.github.io/web-development/vuejs/vue3-coming/
+
 ----
 
 ### [간략 변경점 설명 (한글)](https://velog.io/@bluestragglr/Vue3-%EB%AC%B4%EC%97%87%EC%9D%B4-%EB%B0%94%EB%80%8C%EB%82%98%EC%9A%94)
