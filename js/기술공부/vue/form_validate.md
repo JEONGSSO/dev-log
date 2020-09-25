@@ -46,7 +46,7 @@ methods: {
 }
 
 created() {
-   this.checkPasswd = this._.debounce(this.checkPasswd, 400) // checkPasswd를 디바운스 적용 함수로 만들어 줌
+   this.checkPasswd = this._.debounce(this.checkPasswd, 400) // checkPasswd를 디바운스(lodash) 적용 함수로 만들어 줌
 },
 
 computed: {
