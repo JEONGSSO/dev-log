@@ -32,6 +32,19 @@ form 태그에서 사용하는 form data는 file:(binary) 이런식으로 나오
 자바스크립트에서 append해서 넘기면 form data는 file: base64!@#@!# 이런식으로 나왔었다
 더 찾아봐야 할것
 
+https://github.com/fengyuanchen/cropperjs
+cropperjs에서 제공하는 getCroppedCanvas함수로 진행하면 form 태그와 같이 넘길 수 있따.
+
+```js
+
+this.cropper.getCroppedCanvas({width:300, height:300}).toBlob(async blob => {
+   const formData = new FormData()
+   formData.append('file', blob);
+   ... 
+})
+
+```
+
 request payload는
 post의 값으로 들어가는 것들을 말한다.
 
