@@ -26,12 +26,11 @@ head에 추가하는 이유는 사용자가 들어왔다 빠른시간안에 나�
 클릭 이벤트
 
 ```js
-    function gaEventer(url, category, event) {
-      event = event || 'click';
-      url = url || location.pathname;
+    function gaEventer(category, label, event) {
+      event = event || 'click'; // 대소문자 규약
       gtag('event', event, {
-            'event_category': category,
-            'event_url': url,
+        'event_category': category,
+        'event_label': label,
       });
     };
 ```
