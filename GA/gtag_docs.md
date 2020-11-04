@@ -1,0 +1,1 @@
+https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases
