@@ -6,15 +6,17 @@
 
 ```html
 <head>
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-번호"></script>
-   <script>
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-번호"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var userId = 'test_id';
+    userId && gtag('set', {'user_id': userId}); // userId 수집(ga에서 수집 활성화 필요) gtag function 밑에 적용
+    gtag('js', new Date());
 
-   gtag('config', 'UA-번호');
-   </script>
+    gtag('config', 'UA-번호');
+    </script>
 </head>
 ```
 
