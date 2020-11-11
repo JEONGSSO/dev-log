@@ -10,6 +10,6 @@ Vue.directive('customFocus', {
 
 ```html
 
-<input v-customFocus> // 바로 포커스 잡힘
+<input v-customFocus> <!-- 바로 포커스 잡힘 -->
 
 ```
