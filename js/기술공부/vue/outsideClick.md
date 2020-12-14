@@ -95,7 +95,7 @@ Vue.directive('click-outside', {
 
       document.addEventListener('click', ourClickEvnetHandler);
    },
-   unbind(el) { // unbind 안타는데 조건 찾아서 기록해두기
+   unbind(el) {
       document.removeEventListener('click', el.__vueClickHandler__);
    }
 })
