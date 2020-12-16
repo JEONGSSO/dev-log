@@ -64,5 +64,17 @@ h5 부터는 거의 사용하지 않습니다.
 
 이런 형식으로 작성되어 있다.
 
+figure 이미지 담기
+figcaption 이미지에 대한 설명
+
+```html
+<figure>
+    <figcaption> 
+
+    </figcaption>
+</figure> 
+
+```
+
 더 많은 태그들은 mdn에서 확인할 수 있다
 https://developer.mozilla.org/ko/docs/Web/HTML/Element
