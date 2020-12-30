@@ -46,3 +46,6 @@ profiles
 ## WSL2+Ubuntu 20.04+Docker개발 환경 구축 (일본어)
 
 https://qiita.com/amenoyoya/items/ca9210593395dbfc8531
+
+# 가상환경 vmmem 메모리 이슈
+https://itun.tistory.com/612
