@@ -3,10 +3,24 @@
 
 https://www.lesstif.com/software-architect/wsl-2-windows-subsystem-for-linux-2-89555812.html
 
+https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10 영문
+
+---
+## E: Unable to locate package nodejs 에러
+      sudo apt-get update
 ---
 
+
 ## zsh 설치
+
+설정을 잘못했는지 기본 bash에선 code . 명령어가 먹히지 않는다
+
+zsh 에서는 code . 명령어를 기본으로 잡아주는 듯 하고
+다양한 테마 및 자동완성을 지원한다.
+
 https://velog.io/@moseoridev/WSL-2%EC%97%90-Zsh-%ED%95%9C-%EB%B0%A9%EC%97%90-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
+
+https://velog.io/@praconfi/zsh-oh-my-zsh
 
 ---
 
@@ -49,3 +63,11 @@ https://qiita.com/amenoyoya/items/ca9210593395dbfc8531
 
 # 가상환경 vmmem 메모리 이슈
 https://itun.tistory.com/612
+
+# wsl 명령어(powerShell)
+
+실행중인 wsl 리스트와 버전
+wsl -l -v
+
+실행중인 wsl 프로세스 종료
+wsl --shutdown 
