@@ -61,9 +61,12 @@ profiles
 
 https://qiita.com/amenoyoya/items/ca9210593395dbfc8531
 
+---
 # 가상환경 vmmem 메모리 이슈
+
 https://itun.tistory.com/612
 
+---
 # wsl 명령어(powerShell)
 
 실행중인 wsl 리스트와 버전
@@ -71,3 +74,46 @@ wsl -l -v
 
 실행중인 wsl 프로세스 종료
 wsl --shutdown 
+
+# nvm(node version manager) 설치
+https://docs.microsoft.com/ko-kr/windows/nodejs/setup-on-wsl2 ms공홈
+
+기존 apt get 설치로 node를 설치하게 되면 10.x 버전으로 설치되기 때문에
+(21-01-02 기준 lts 14.x 버전)
+
+nvm으로 최신버전의 node와 npm, npx를 설치하고자 함
+
+[curl(명령줄을 사용하여 인터넷에서 콘텐츠를 다운로드하는 데 사용되는 도구)](https://github.com/nvm-sh/nvm) 설치 최신버전 확인도 이 깃허브에서 한다.
+   
+      sudo apt get curl
+
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+
+      <!-- 20-01-02 기준 curl 최신버전 v0.37.2 -->
+
+      nvm ls
+
+      <!-- 설치된 node 리스트 나열 -->
+
+      nvm install node --lts 
+
+      <!-- lts버전(안정적 릴리즈 버전) 다운 -->
+
+
+그런데 wsl 새탭을 열때 nvm 못찾는 경우가 있다.
+
+nvm 설치시에 .bashrc 파일에 추가해주는 경로를
+
+zsh 세팅 파일(.zshrc)에
+      
+      vi ~/.zshrc
+
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+추가후 
+
+      source ~/.zshrc
+
+세팅파일 적용
