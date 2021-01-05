@@ -2,7 +2,7 @@
 Advanced Packaging Tool의 약자
 
 apt는 apt-get + apt-cache를 필요한 기능만 사용한 버전이라고 생각하면된다.
-사용방법은 같다.
+사용방법은 같다. ex) apt install package-name
 
 https://devlog.jwgo.kr/2019/04/11/apt-vs-apt-get/
 

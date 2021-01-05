@@ -5,7 +5,7 @@
 3. New SSH key 버튼 클릭
 4. 키 타이틀과 공개키를 붙여넣는다.
 
-## 공개키 생성하는 법 (cmd 또는 bash에서)
+## 공개키 생성하는 법 (window cmd 또는 bash에서)
 ```bash
 ### bash ###
 $ ssh-keygen -t rsa
@@ -14,7 +14,43 @@ $ cd ~/.ssh
 $ ls
    id_rsa id_rsa.pub
 ```
+
+## linux
+
+~/.ssh 폴더에 id_rsa, id_rsa.pub 파일이 있으면 사용
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "example@naver.com"
+# -t 암호화 타입 정하기
+# -b  생성 키의 비트 수 지정(4096) rsa타입은 최소 768비트가 필요
+# -C 주석 이메일로 주석 닮
+
+# ssh-keygen을 실행하면 암호를 정할 수 있고 (생략가능)
+
+~/.ssh 폴더에서 ll
+id_rsa, id_rsa.pub 생성됨
+
+cat id_rsa.pub
+
+# cat 출력된 내용 복사 후 깃허브가서 붙여넣기
+
+# ssh-agent 개인 키 관리를 해주는 기능 매번 passphrase 입력하지 않게 해줌
+
+ssh-add ~/.ssh/id_rsa
+
+#암호 입력했으면 끝. 암호가 없으면 입력안해도 되는듯
+
+```
+
+https://jootc.com/p/201905122827
+
+https://dgkim5360.tistory.com/entry/gnu-linux-crypto-04-agents
+
+
+
+
 .pub가 붙은 건 공개키, 안붙은 건 비밀키
+
 
 5. github 프로젝트 페이지에 가서 clone or download 버튼 클릭, Use SSH 클릭, 링크 복사
 
