@@ -40,6 +40,9 @@ ssh-add ~/.ssh/id_rsa
 
 #암호 입력했으면 끝. 암호가 없으면 입력안해도 되는듯
 
+# 다시 공개키에 대한 비밀번호 요구시 
+eval $(ssh-agent) ssh-agent 실행시키면 된다.
+
 ```
 
 https://jootc.com/p/201905122827
