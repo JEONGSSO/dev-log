@@ -121,3 +121,61 @@ zsh 세팅 파일(.zshrc)에
 세팅파일 적용
 
 zsh를안쓰면 .profile 이나 .bashrc 파일에 추가한다.
+
+---
+
+## Intellij IDEA with WSL2
+
+Jetbrains IDEA 사용할 수도 있으니 기록.
+
+윈도우와 wsl gui로 연결해주는 프로그램 설치
+
+https://sourceforge.net/projects/vcxsrv/
+x server 다운
+
+https://velog.io/@melonicecream/Intelij-IDEA-with-WSL2
+
+.bashrc(.zshrc) 에 해당 display 추가
+
+      export DISPLAY="`grep nameserver /etc/resolv.conf | sed 's/nameserver //'`:0"
+
+      source .bashrc 
+
+https://www.jetbrains.com/ko-kr/phpstorm/download/#section=linux
+
+tar.gz 파일 다운후 tar 명령어로 압축 해제
+
+      tar -zxf
+
+-z gunzip을 사용
+
+-x 묶음을 해제
+
+-f 파일 이름을 지정
+
+      #의존성 설치
+      sudo apt (또는 apt-get) install libxss1 
+
+압축 푼 폴더에가서 ./bin/phpstorm(idea-name).sh로 실행
+
+상용구(alias)생성
+vi .bashrc
+```bash
+      alias pst="sh /home/PhpStorm-203.6682.180/bin/phpstorm.sh"
+```
+
+**Unable to detect graphics environment 에러 나는경우**
+
+윈도우에서 x server가 실행이 안되어있어 /etc/resolve.conf 파일이 없기때문 에러 나는것
+xlaunch.exe 실행
+
+https://realforce111.tistory.com/40
+---
+## jetbrain 한글 입력 
+
+fcitx라는 프로그램을 설치후 설정해주어야 한다.
+
+https://hasoo.github.io/java/wsl2-intellij/
+
+---
+
