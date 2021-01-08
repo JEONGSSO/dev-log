@@ -30,8 +30,6 @@ https://docs.microsoft.com/ko-kr/windows/terminal/troubleshooting
 
 맨 처음 터미널을 키면 /mnt/c/Users/\<userName>으로 접근이 되는데 단일 경로 트리구조이기 때문에 c 드라이브 구조 까지 접근하는데에 리소스를 잡아먹는다고 한다.
 
-<<<<<<< HEAD
-=======
 ```
       Ubuntu (Linux 배포판)를 사용 하며, 프로젝트 파일을 WSL 파일 시스템에 저장 하려고 합니다
       \\wsl\ . Windows 파일 시스템(/mnt/c)에 프로젝트 파일을 저장 하면 WSL에서 Linux 도구를 사용 하여 해당 파일에 액세스할 때 성능이 크게 저하 됩니다.
@@ -39,7 +37,6 @@ https://docs.microsoft.com/ko-kr/windows/terminal/troubleshooting
 
 https://docs.microsoft.com/ko-kr/windows/wsl/tutorials/wsl-containers
 
->>>>>>> 49d27ac47188a96a6e8051fb79dc3601cc4843d0
 기본 경로를 /home으로 변경하자
 
 터미널에서 ctrl + , 로 세팅에 들어가서
