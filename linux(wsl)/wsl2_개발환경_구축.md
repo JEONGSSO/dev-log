@@ -15,7 +15,17 @@ https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10 영문
 
 설정을 잘못했는지 기본 bash에선 code . 명령어가 먹히지 않는다
 
-zsh 에서는 code . 명령어를 기본으로 잡아주는 듯 하고
+~~zsh 에서는 code . 명령어를 기본으로 잡아주는 듯 하고~~
+
+```bash
+vi .zshrc
+
+...
+alias code="/mnt/c/Users/<userName>/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
+# 별칭을 설정하고 업로드후 실행하면 vscode-server 설치후 실행된다.
+
+```
+
 다양한 테마 및 자동완성을 지원한다.
 
 https://velog.io/@moseoridev/WSL-2%EC%97%90-Zsh-%ED%95%9C-%EB%B0%A9%EC%97%90-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
