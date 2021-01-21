@@ -59,3 +59,5 @@ ON e.department_id = d.department_id
 |3|박|영업부|
 |4|이|전산부|
 |5|신|NULL|
+
+https://doorbw.tistory.com/223
