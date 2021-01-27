@@ -147,7 +147,7 @@ li.appendChild(label);
 itemList.appendChild(li);
 ```
 
-새로 리스트가 추가될때 마다 이벤트를 넣어 주는 것 보다 이벤트 위임으로 리스트 부모 요소에 이벤트를 자식들에게 전파할 수 있게 해주면 될 것 같습니다.
+새로 리스트가 추가될때 마다 이벤트를 넣어 주는 것 보다 이벤트 위임으로 리스트 부모 요소에 이벤트를 자식들에게 전파할 수 있게 해주면 될 것 같다.
 
 ```js
 // 이전 코드
@@ -165,5 +165,4 @@ itemList.addEventListener('click', function(event) {
 });
 
 ```
-
 https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
