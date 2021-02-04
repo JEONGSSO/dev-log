@@ -165,4 +165,50 @@ itemList.addEventListener('click', function(event) {
 });
 
 ```
+## click 이벤트 내에 e.target, this, e.currentTarget 차이점?
+
+```html
+<div>
+	<button>버튼</button>
+</div>
+```
+
+```js
+	const elem = document.querySelector('div');
+
+	elem.addEventListner('click', function (e) {
+		console.log(this) // <div>
+		console.log(e.currentTarget) // <div>
+		console.log(this === e.currentTarget) // true
+
+		// 실제 이벤트가 시작된 타겟 요소
+		console.log(e.target) // button
+
+		// 이벤트 버블링으로 button에서 div로 이벤트가 전파된다.
+	})
+```
+
+## addEventListner 인자 넘기기
+
+```js
+const a = 1
+const b = 2
+
+function handler1() {
+	...
+}
+
+// 인자를 넘기고 싶었으나 즉시실행이 되어버림
+elem.addEventListner('click', handler1(a, b)) 
+elem.addEventListner('click', e => handler1(e))
+
+function handler2(e) {
+	otherFuntion(e, a, b) // 콜백함수 안에서 넘겨서 우회(?)할 수 있다.
+}
+elem.addEventListner('click', handler2)
+
+```
+
 https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
+https://poiemaweb.com/js-event
+https://ko.javascript.info/bubbling-and-capturing

@@ -33,7 +33,7 @@ export default {
     mounted() {
       setTimeout(() => {
         this.initSwiperMatch();
-        // ajax비동기 데이터로 v for를 사용하면 fetch 및 렌더링 시간때문에 비동기함수를 사용해 swiper 가 정상적으로 부착되도록 지연 시간을 준다.
+        // ajax비동기 데이터로 v for를 사용하면 fetch 및 렌더링 시간때문에 비동기함수를 사용해 swiper가 정상적으로 부착되도록 지연 시간을 준다.
       }, 1000)
     }
   }
