@@ -1,10 +1,12 @@
-사파리에서 모달창을 열었을때 스크롤을 방지하기 위한
+사파리에서는 모달창을 열었을때 스크롤을 방지하기 위한
 
 overflow hidden이 적용이 안된다.
 
+다른 처리 방법들
+
 제이쿼리로는 이렇게 적용하고
 
-https://stackoverflow.com/questions/3656592/how-to-programmatically-disable-page-scrolling-with-jquery
+스크롤 이벤트 방지 활성화
 
 ```js
 $(".contents").on("scroll touchmove mousewheel", function (e) {
@@ -37,3 +39,5 @@ if ($(".contents").css("position") === "fixed") {
   $(".contents").css({ position: "static" });
 }
 ```
+
+https://stackoverflow.com/questions/3656592/how-to-programmatically-disable-page-scrolling-with-jquery
