@@ -14,19 +14,14 @@ const alias = {
   M: 1000,
 };
 
-// const str = "IX";
 // const str = "III";
-const str = "VVV";
+// const str = "IX";
+// const str = "IV";
+// const str = "LVIII";
+const str = "MCMXCIV";
 
-// 앞 문자가 뒤 문자보다 작으면 뺄셈
-// 같거나 크면 합
-
-// 문자열을 배열로 만듬
-// 문자열을 숫자로 치환
-// 반복문을 통해 지금 값과 다음 값 비교
-// 지금 값이 더 작으면 합계 + 다음 값 - 지금 값
-// 아니면 합계 + 다음 값 + 지금 값
-//
+// 앞 문자가 뒤 문자보다 작으면 앞 문자 - 뒤 문자 후 합
+// 같거나 크면 그냥 합
 
 let sum = 0;
 /**
@@ -35,21 +30,13 @@ let sum = 0;
  * @return {number}
  */
 const solution = (str) => {
-  [...str].forEach((s, index) => {
-    if (!str[index + 1]) return;
-    const num = alias[s];
-    const nextNum = alias[str[index + 1]];
-    // const nextNum = str[index + 1] ? alias[str[index + 1]] : 0;
-    console.log("num", index, num);
-    console.log("nextNum", index + 1, nextNum);
-    // if (num < nextNum) {
-    //   sum += nextNum - num;
-    // } else {
-    //   sum += num + nextNum;
-    // }
-  });
-  // console.log(sum);
+  for (let i = 0; i < str.length; i++) {
+    const num = alias[str[i]];
+    const nextNum = alias[str[i + 1]] || 0;
+    sum += nextNum > num ? -num : num;
+  }
+  return sum;
 };
 console.time(1);
-solution(str);
+console.log(solution(str));
 console.timeEnd(1);
