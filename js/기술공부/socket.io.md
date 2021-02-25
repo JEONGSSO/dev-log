@@ -3,7 +3,7 @@
 ```js
 import socket from 'js/기술공부/socket.io'
 
-socket.on('connection', {
+socket.on('connection', () => {
    //연결이 된 후에
 
    socket.on('message') 받음
