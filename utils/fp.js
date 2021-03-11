@@ -24,9 +24,11 @@ const take = curry((l, iter) => {
   return res;
 });
 
-const takeAll = take(Infinity)
-  
+const takeAll = take(Infinity);
+
 const go = (...args) => reduce((a, f) => f(a), args);
+const go1 = (...args) =>
+  reduce((a, f) => (a instanceof Promise ? a.then(f) : f(a)), args);
 
 const pipe = (fn, ...fns) => (...as) => go(fn(...as), ...fns);
 
@@ -43,7 +45,7 @@ L.map = curry(function* (f, iter) {
 
 L.filter = curry(function* (f, iter) {
   for (const a of iter) {
-    if(f(a)) yield a;
+    if (f(a)) yield a;
   }
 });
 
@@ -62,8 +64,9 @@ const range = (start, stop, step = 1) => {
   return arr;
 };
 
-const join = curry((sep = ',', list) => 
-    reduce((pre, val) => pre+sep+val, list))
+const join = curry((sep = ",", list) =>
+  reduce((pre, val) => pre + sep + val, list)
+);
 
 // export default {
 //   map,
