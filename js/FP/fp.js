@@ -68,6 +68,11 @@ const join = curry((sep = ",", list) =>
   reduce((pre, val) => pre + sep + val, list)
 );
 
+const tap = curry((f, val) => {
+  f(val);
+  return val;
+});
+
 // export default {
 //   map,
 //   filter,
