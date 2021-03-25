@@ -1,6 +1,7 @@
 (() => {
   let count = 0;
   const init = 1;
+  // let init = Number(require('fs').readFileSync('/dev/stdin').toString());
 
   const solution = (n) => {
     if (n / 1 === init && count) {
