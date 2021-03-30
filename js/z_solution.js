@@ -1,50 +1,20 @@
-const readline = require("readline");
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+const solution = (x) => {
+  const good = x.split("").reduce((acc, val) => {
+    return acc + Number(val);
+  }, 0);
 
-let inputCnt = 0;
-let count = 0;
-const nameArr = [];
+  const second = good % 10;
+  const first = (good - second) / 10;
 
-rl.on("line", function (line) {
-  inputCnt++;
+  return first + second;
+};
 
-  if (inputCnt === 1) {
-    count = Number(line);
-  } else {
-    nameArr.push(line);
-  }
+// const target = "12/31/2014";
+const target = "5";
 
-  if (inputCnt > count) {
-    const solution = (n, arr) => {
-      if (n === 1) {
-        return arr[0];
-      }
+console.time(1);
 
-      const strLength = arr[0].length;
-      let result = "";
+const good = solution(target);
+console.log(good);
 
-      for (let j = 0; j < strLength; j++) {
-        for (let i = 1; i < n; i++) {
-          if (arr[0][j] !== arr[i][j]) {
-            result += "?";
-            break;
-          }
-
-          if (i === n - 1) {
-            result += arr[0][j];
-          }
-        }
-      }
-
-      return result;
-    };
-
-    console.log(solution(count, nameArr));
-    rl.close();
-  }
-}).on("close", function () {
-  process.exit();
-});
+console.timeEnd(1);

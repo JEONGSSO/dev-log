@@ -35,7 +35,7 @@ const reverse = (num) => {
   const a = num < 0 ? -1 : 1;
   const number = Math.abs(num).toString().split("").reverse().join("");
 
-  return limit < num ? 0 : number * a;
+  return limit < number ? 0 : number * a;
 };
 ```
 
