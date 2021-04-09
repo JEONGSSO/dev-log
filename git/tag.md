@@ -22,12 +22,12 @@ git tag -a test -m "teg test"
 git tag
 
 // 커밋 내역, 태깅 로그 확인 가능.
-git log 
+git log
 commit ~~ (HEAD -> master, tag: test, origin/master, origin/HEAD)
 
 // 로컬에만 저장된 태그를 repo로 푸쉬.
 git push origin test
- 
+
 ```
 
 tag의 장점은 checkout할 경우 tag id로도 가능하다는 것입니다.
@@ -35,7 +35,22 @@ tag의 장점은 checkout할 경우 tag id로도 가능하다는 것입니다.
 ```bash
 git checkout test
 ```
+
 test tag로 체크아웃!
+
+```bash
+
+git push origin v0.0.1
+
+git push origin v0.0.2
+
+했을때 v0.0.2 버전에 문제가 생겨 롤백하게된다면
+
+git reset --hard v0.0.1 #v0.0.1 버전으로 코드가 돌아감
+
+git tag 하면 v0.0.2는 남아있음
+
+```
 
 출처 : https://mr-dan.tistory.com/48
 https://backlog.com/git-tutorial/kr/stepup/stepup4_1.html
