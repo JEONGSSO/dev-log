@@ -30,4 +30,4 @@ rl.on("line", function (line) {
   process.exit();
 });
 
-// https://jun01.tistory.com/14
+// https://jun01.tistory.com/14 참고 하였습니다.
