@@ -18,12 +18,11 @@ https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10 영문
 
 설정을 잘못했는지 기본 bash에선 code . 명령어가 먹히지 않는다
 
-~~zsh 에서는 code . 명령어를 기본으로 잡아주는 듯 하고~~
-
 ```bash
 vi .zshrc
 
 ...
+# code . 명령어가 안먹힐경우
 alias code="/mnt/c/Users/<userName>/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
 # 별칭을 설정하고 업로드후 실행하면 vscode-server 설치후 실행된다.
 
@@ -80,6 +79,7 @@ profiles
 ## d2Coding 설치
 
 https://jamix.tistory.com/41
+
 https://medium.com/@boystyou82/%EC%9C%88%EB%8F%84%EC%9A%B010-frontend-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EC%84%B8%ED%8C%85-2-d82b47136e63
 
 ## WSL2+Ubuntu 20.04+Docker개발 환경 구축 (일본어)
