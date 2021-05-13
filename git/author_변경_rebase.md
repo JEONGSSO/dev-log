@@ -9,6 +9,10 @@
 
       git rebase -p -i  HEAD~
 
+      ************************************************
+      invalid upstream 'HEAD~' 같은 메시지가 뜨면
+      git rebase -i --root 명령어로 root로 보낼수 있다.
+
 편집 창이 뜨면
 
       pick <수정하고자 하는 커밋내용>
@@ -30,3 +34,5 @@ edit을 붙인 내역이 여러개거나 수정할 사항이 없다면
 \+ 붙여서 강제 푸쉬
 
 https://jojoldu.tistory.com/120
+
+https://hyesun03.github.io/2018/10/05/git-rootcommit-edit/
