@@ -14,13 +14,13 @@ Testing Library 간단 사용법
 
 ### [쿼리 우선 순위](https://testing-library.com/docs/queries/about/#priority)
 
-1. getByLabelText
-2. getByPlaceholderText
-3. getByText
-4. getByDisplayValue
-5. getByAltText
-6. getByTitle
-7. getByRole
+1. getByRole
+2. getByLabelText
+3. getByPlaceholderText
+4. getByText
+5. getByDisplayValue
+6. getByAltText
+7. getByTitle
 8. getByTestId
 
 ---
