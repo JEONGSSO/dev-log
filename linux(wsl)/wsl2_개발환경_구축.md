@@ -115,7 +115,7 @@ nvm으로 최신버전의 node와 npm, npx를 설치하고자 함
 
 [curl(명령줄을 사용하여 인터넷에서 콘텐츠를 다운로드하는 데 사용되는 도구)](https://github.com/nvm-sh/nvm) 설치 최신버전 확인도 이 깃허브에서 한다.
 
-      sudo apt get curl
+      sudo apt-get install curl
 
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 
