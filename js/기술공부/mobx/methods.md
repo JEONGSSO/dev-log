@@ -158,3 +158,9 @@ runInAction(() => {
   state.value++;
 });
 ```
+
+https://mobx.js.org/observable-state.html
+
+https://mobx.js.org/actions.html
+
+https://velog.io/@yejineee/MobX%EC%97%90%EC%84%9C-observable-action-%EB%A7%8C%EB%93%A4%EA%B8%B0
