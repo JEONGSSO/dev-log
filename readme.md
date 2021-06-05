@@ -2,7 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
-| [JS] [weekly Archives for javascript, FE](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/성장/weekly_Archives.md)                             | 매 주 자바스크립트 최신 트렌드 구둑 서비스                   | 21/06/05      |
+| [JS] [weekly Archives for javascript, FE](https://github.com/JEONGSSO/dev-log/blob/master/js/성장/weekly_Archives.md)                                      | 매 주 자바스크립트 최신 트렌드 구둑 서비스                   | 21/06/05      |
 | [JS] [Individual state](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/for_Individual_state.js)                                         | react 컴포넌트 개별 useState 추가하기                        | 21/06/04      |
 | [JS] [mobx methods](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/mobx/methods.md)                                                           | mobx 헷갈리는 사용법 정리                                    | 21/05/31      |
 | [JS] [mobx basic counter app](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/mobx/counterApp.md)                                              | mobx 카운터 앱 예제                                          | 21/05/27      |
@@ -12,7 +12,7 @@
 | [GIT] [git rebase author](https://github.com/JEONGSSO/dev-log/blob/master/git/author_변경_rebase.md)                                                       | git rebase로 author 변경하기                                 | 21/05/13      |
 | [JS] [storybook webpack5 troble shoot](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/storyBook_webpack_5_issue.md)                     | storybook과 webpack5 연동시 이슈 정리                        | 21/05/12      |
 | [JS] [trend js](https://github.com/JEONGSSO/dev-log/blob/master/js/성장/트렌드.md)                                                                         | JS 트렌드 좋은 사이트 추천(zeroCho님 추천)                   | 21/05/10      |
-| [DEVELOPER] [클린코드 4,5장](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/클린코드/책정리#4.주석.md)                                           | 클린코드 4,5장                                               | 21/05/09      |
+| [DEVELOPER] [클린코드 4,5장](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/클린코드/책정리.md#4주석)                                            | 클린코드 4,5장                                               | 21/05/09      |
 | [LINUX(WSL)] [wsl2 development environment](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/wsl2_개발환경_구축.md>)                            | WSL2 개발환경 구축기, 이슈                                   | 21/05/08      |
 | [JS] [TOSS SLASH21 JS Bundle diet](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/toss_SLASH21/js_bundle_diet.md)                                | 번들 사이즈 줄이기 (이한 님)                                 | 21/05/08      |
 | [JS] [vue3 composition](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/vue/vue3/vue_composition_api.md)                                       | Vue3 Composition api watch, watchEffect 추가                 | 21/05/07      |
@@ -32,7 +32,7 @@
 | [JS] [구름 소수판별](https://github.com/JEONGSSO/dev-log/blob/master/js/문제풀이/groom/소수판별.js)                                                        | 구름 소수판별                                                | 21/04/14      |
 | [LINUX(WSL)] [wsl2 git corrupt](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/wsl_git_corrupt.md>)                                           | wsl2에서 간헐적으로 git 오염되는 문제 정보                   | 21/04/13      |
 | [JS] [백준 대부분의 배수](https://github.com/JEONGSSO/dev-log/blob/master/js/문제풀이/백준/1145_대부분의_배수.js)                                          | 구름 대부분의 배수                                           | 21/04/12      |
-| [DEVELOPER] [클린코드 2,3장](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/클린코드/책정리#2.의미 있는 이름.md)                                 | 클린코드 2, 3장                                              | 21/04/03      |
+| [DEVELOPER] [클린코드 2,3장](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/클린코드/책정리.md#2의미-있는-이름)                                  | 클린코드 2, 3장                                              | 21/04/03      |
 | [DEVELOPER] [클린코드 1장](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/클린코드/책정리.md)                                                    | 클린코드 1장                                                 | 21/03/31      |
 | [JS] [WANTED - 성장하는 Fe 개발자](https://github.com/JEONGSSO/dev-log/blob/master/js/성장/성장하는_fe_개발자.md)                                          | 성장하는 개발자 정리                                         | 21/03/30      |
 | [JS] [Vue3 masterclass free class day](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/vue/vue3_masterclass_vue_school/유용한것_정리.md)       | vue school에서 무료로 공개했던 vue3 정보 정리                | 21/03/29      |
