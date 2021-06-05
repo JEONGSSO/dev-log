@@ -5,9 +5,9 @@ cross site scripting
 
 게시판 등에 스크립트 코드를 입력해 공격하는 방식
 
-- 예시 1 : <img src="" onerror="alert('으왘!');">
-- 예시 2 : <img src="" onerror="window.open('ht'+'tps:'+'//naver.com','_blank')">
-- 예시 3 : <img src="" onerror="opener.close();">
+- 예시 1 : \<img src="" onerror="alert('으왘!');">
+- 예시 2 : \<img src="" onerror="window.open('ht'+'tps:'+'//naver.com','\_blank')">
+- 예시 3 : \<img src="" onerror="opener.close();">
 
 * Reflected XSS
 
