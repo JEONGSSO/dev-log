@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [JS] [javascript to know for react](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/javascript_to_know_for_react.md)                     | Kent C. Dodds의 리액트에서 유용햔 javascript 문법들 정리     | 21/06/07      |
 | [JS] [Front End Testing is For Everyone](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/FE_Testing_is_For_Everyone.md)                         | 프론트 엔드에서의 테스팅 종류들                              | 21/06/06      |
 | [JS] [weekly Archives for javascript, FE](https://github.com/JEONGSSO/dev-log/blob/master/js/성장/weekly_Archives.md)                                      | 매 주 자바스크립트 최신 트렌드 구독 서비스                   | 21/06/05      |
 | [JS] [Individual state](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/for_Individual_state.js)                                         | react 컴포넌트 개별 useState 추가하기                        | 21/06/04      |
