@@ -1,3 +1,5 @@
+// useMemo를 사용하여 더 최적화를 할 수 있을 것 같다.
+
 const List = ({ list }) => {
   const generateDom = useMemo(() => {
     let dom = [];
