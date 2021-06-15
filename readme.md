@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [CSS] [grid generator](https://layout.bradwoods.io/)                                                                                                       | css 그리드 레아이웃 직접 변경하고 확인 할 수 있는 사이트     | 21/06/14      |
 | [JS] [useRef MultiElement](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/useRef_multiple_elements.md)                                  | useRef 여러 엘리먼트 넣기                                    | 21/06/11      |
 | [JS] [모듈시스템](https://github.com/JEONGSSO/dev-log/blob/master/js/프론트면접/모듈시스템.md)                                                             | CommonJS, AMD, UMD,ES6에 대해 대해                           | 21/06/10      |
 | [JS] [클로저](https://github.com/JEONGSSO/dev-log/blob/master/js/프론트면접/클로저.md)                                                                     | 클로저 간단정리                                              | 21/06/09      |

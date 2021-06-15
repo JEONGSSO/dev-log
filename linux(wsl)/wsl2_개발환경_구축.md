@@ -210,3 +210,20 @@ https://hasoo.github.io/java/wsl2-intellij/
 세팅을 잘못했는지 한글 입력이 너무 느려서 vscode 사용함
 
 ---
+
+## wsl 삭제하기
+
+powershell을 열고
+
+```bash
+wslconfig.exe /l # 리스트확인
+
+# Ubuntu (Default)
+
+wslconfig.exe /u Ubuntu # 삭제
+
+```
+
+https://lahuman.github.io/wsl_uninstall/
+
+---
