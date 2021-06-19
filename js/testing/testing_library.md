@@ -48,6 +48,9 @@ https://kentcdodds.com/blog/common-mistakes-with-react-testing-library#not-using
 
 **DOM에서 일치하는 role을 찾아 반환 (웬만하면 getByRole 사용 권장)**
 
+w3c에서 role을 찾을 수 있다.
+https://www.w3.org/TR/wai-aria/#role_definitions
+
 ```js
 <div>
   <button role="tab" aria-selected="true">Native</button>
