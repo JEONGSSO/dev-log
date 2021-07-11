@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [JS] [grid remove element keep space](https://github.com/JEONGSSO/dev-log/blob/master/css/grid_keep_space.md)                                              | 그리드 삭제 엘리먼트공간 유지하기                            | 21/07/11      |
 | [JS] [material ui layout](https://github.com/JEONGSSO/dev-log/blob/master/js/material_ui/Layout.md)                                                        | Material ui 레이아웃 docs 정리                               | 21/07/07      |
 | [JS] [datagrip data migration](https://github.com/JEONGSSO/dev-log/blob/master/sql/datagrip_data_migration.md)                                             | datagrip툴을 사용하여 데이터 이관하기                        | 21/07/03      |
 | [JS] [academind](https://academind.com/)                                                                                                                   | 프로그래밍 학습 커뮤니티                                     | 21/06/27      |
