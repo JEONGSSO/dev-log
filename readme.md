@@ -2,10 +2,11 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
-| [JS] [grid remove element keep space](https://github.com/JEONGSSO/dev-log/blob/master/css/grid_keep_space.md)                                              | 그리드 삭제 엘리먼트공간 유지하기                            | 21/07/11      |
+| [LINUX(WSL)] [wsl mysql install](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/mysql_install.md>)                                            | wsl(ubuntu-20.04)에서 mysql(8.0) 설치하기                    | 21/07/12      |
+| [CSS] [grid remove element keep space](https://github.com/JEONGSSO/dev-log/blob/master/css/grid_keep_space.md)                                             | 그리드 삭제 엘리먼트공간 유지하기                            | 21/07/11      |
 | [JS] [material ui layout](https://github.com/JEONGSSO/dev-log/blob/master/js/material_ui/Layout.md)                                                        | Material ui 레이아웃 docs 정리                               | 21/07/07      |
-| [JS] [datagrip data migration](https://github.com/JEONGSSO/dev-log/blob/master/sql/datagrip_data_migration.md)                                             | datagrip툴을 사용하여 데이터 이관하기                        | 21/07/03      |
-| [JS] [academind](https://academind.com/)                                                                                                                   | 프로그래밍 학습 커뮤니티                                     | 21/06/27      |
+| [SQL] [sql data migration](https://github.com/JEONGSSO/dev-log/blob/master/sql/sql_tool_data_migration.md)                                                 | sql 툴을 사용하여 데이터 이관하기                            | 21/07/03      |
+| [BLOG] [academind](https://academind.com/)                                                                                                                 | 프로그래밍 학습 커뮤니티                                     | 21/06/27      |
 | [JS] [Testing Library common mistake](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/Testing_Library_common_mistake.md)                        | testing library 사용시 실수 했던 내용들                      | 21/06/21      |
 | [JS] [udemy_2021_react_complete](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/udemy_complete/2.컨셉/정리.md)                          | udemy 2021 리액트 인강 공부                                  | 21/06/16      |
 | [CSS] [grid generator](https://layout.bradwoods.io/)                                                                                                       | css 그리드 레아이웃 직접 변경하고 확인 할 수 있는 사이트     | 21/06/15      |
