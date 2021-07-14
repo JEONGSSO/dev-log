@@ -278,3 +278,11 @@ console.log(getProperty(obj, "z")); // error z는 obj의 key가 아님
 
 참조
 https://joshua1988.github.io/ts/intro.html
+
+### maybe 제네릭
+
+```ts
+const Nothing = Symbol("nothing");
+type Nothing = typeof Nothing;
+type Maybe<T> = T | Nothing;
+```
