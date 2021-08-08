@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [LINUX(WSL)] [corrupt zsh history](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/corrupt_zsh_history.md>)                                    | wsl zsh 오염 치유(?)하기                                     | 21/08/08      |
 | [LINUX(WSL)] [wsl mysql install](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/mysql_install.md>)                                            | wsl(ubuntu-20.04)에서 mysql(8.0) 설치하기                    | 21/07/12      |
 | [CSS] [grid remove element keep space](https://github.com/JEONGSSO/dev-log/blob/master/css/grid_keep_space.md)                                             | 그리드 삭제 엘리먼트공간 유지하기                            | 21/07/11      |
 | [JS] [material ui layout](https://github.com/JEONGSSO/dev-log/blob/master/js/material_ui/Layout.md)                                                        | Material ui 레이아웃 docs 정리                               | 21/07/07      |
