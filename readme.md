@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [CSS] [latest css](https://github.com/JEONGSSO/dev-log/blob/master/css/최신_css_5가지.md)                                                                  | 최신 css 기능 5가지                                          | 21/08/17      |
 | [GIT] [actions test](https://github.com/JEONGSSO/dev-log/blob/master/git/actions_test.md)                                                                  | github action 간단하게 써보기                                | 21/08/09      |
 | [LINUX(WSL)] [corrupt zsh history](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/corrupt_zsh_history.md>)                                    | wsl zsh 오염 치유(?)하기                                     | 21/08/08      |
 | [LINUX(WSL)] [wsl mysql install](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/mysql_install.md>)                                            | wsl(ubuntu-20.04)에서 mysql(8.0) 설치하기                    | 21/07/12      |
