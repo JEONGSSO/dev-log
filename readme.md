@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [TS] [tsconfig basic](https://github.com/JEONGSSO/dev-log/blob/master/TypeScript/tsconfig.md)                                                              | tsconfig 설정들 간략 정리                                    | 21/08/22      |
 | [CSS] [latest css](https://github.com/JEONGSSO/dev-log/blob/master/css/최신_css_5가지.md)                                                                  | 최신 css 기능 5가지                                          | 21/08/17      |
 | [GIT] [actions test](https://github.com/JEONGSSO/dev-log/blob/master/git/actions_test.md)                                                                  | github action 간단하게 써보기                                | 21/08/09      |
 | [LINUX(WSL)] [corrupt zsh history](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/corrupt_zsh_history.md>)                                    | wsl zsh 오염 치유(?)하기                                     | 21/08/08      |
