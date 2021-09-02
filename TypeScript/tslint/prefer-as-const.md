@@ -2,6 +2,8 @@
 
 This rule recommends usage of `const` assertion when type primitive value is equal to type.
 
+변수의 값과 변수의 타입이 같은 경우에 const를 assertion 사용하는것을 권장
+
 ## Rule Details
 
 Examples of **incorrect** code for this rule:
@@ -21,6 +23,14 @@ let foo: "bar" = "bar" as const;
 let bar = "bar" as string;
 let foo = <string>"bar";
 let foo = { bar: "baz" };
+```
+
+## Running eslint
+
+```bash
+  34:10  warning  Expected a `const` assertion instead of a literal type annotation  @typescript-eslint/prefer-as-const
+  35:12  warning  Expected a `const` instead of a literal type assertion             @typescript-eslint/prefer-as-const
+  36:27  warning  Expected a `const` instead of a literal type assertion             @typescript-eslint/prefer-as-const
 ```
 
 ## When Not To Use It

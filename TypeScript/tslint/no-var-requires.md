@@ -2,22 +2,27 @@
 
 In other words, the use of forms such as `var foo = require("foo")` are banned. Instead use ES6 style imports or `import foo = require("foo")` imports.
 
+require를 사용하여 모듈을 가져오는 것을 금지, import를 사용하여 모듈을 가져오는것을 권장
+
 ## Rule Details
 
-Examples of **incorrect** code for this rule:
-
 ```ts
-var foo = require("foo");
-const foo = require("foo");
-let foo = require("foo");
+var foo = require("foo"); //warning
+import foo = require("foo"); // pass
+
+const foo = require("foo"); //warning
+require("foo"); // pass
+
+let foo = require("foo"); //warning
+import foo from "foo"; // pass
 ```
 
-Examples of **correct** code for this rule:
+## Running eslint
 
-```ts
-import foo = require("foo");
-require("foo");
-import foo from "foo";
+```bash
+  38:11  warning  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  39:13  warning  Require statement not part of import statement  @typescript-eslint/no-var-requires
+  40:11  warning  Require statement not part of import statement  @typescript-eslint/no-var-requires
 ```
 
 ## When Not To Use It

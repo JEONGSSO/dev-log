@@ -8,20 +8,49 @@ Returned `any` typed values are not checked at all by TypeScript, so it creates 
 This rule disallows returning `any` or `any[]` from a function.
 This rule also compares the return type to the function's declared/inferred return type to ensure you don't return an unsafe `any` in a generic position to a receiver that's expecting a specific type. For example, it will error if you return `Set<any>` from a function declared as returning `Set<string>`.
 
-Examples of **incorrect** code for this rule:
+함수 리턴값에 any, any[] 타입을 허용할지에 대해 체크하는 룰.
+
+예를 들어 Set<string>이 반환된다고 선언한 함수에 Set<any>를 반환하면 체크
 
 ```ts
+// warning
 function foo1() {
   return 1 as any;
 }
-function foo2() {
-  return Object.create(null);
+
+// pass
+function foo1() {
+  return 1;
 }
+
+// warning
+function foo2() {
+  return Object.create(null); // return any
+}
+
+// pass
+function foo2() {
+  return Object.create(null) as Record<string, unknown>;
+}
+
+// warning
 const foo3 = () => {
   return 1 as any;
 };
+
+// pass
+const foo3 = () => [];
+
+// warning
 const foo4 = () => Object.create(null);
 
+// pass
+const foo4 = () => ["a"];
+```
+
+Examples of **incorrect** code for this rule:
+
+```ts
 function foo5() {
   return [] as any[];
 }
@@ -52,16 +81,6 @@ const assignability2: TAssign = () => new Set<any>([true]);
 Examples of **correct** code for this rule:
 
 ```ts
-function foo1() {
-  return 1;
-}
-function foo2() {
-  return Object.create(null) as Record<string, unknown>;
-}
-
-const foo3 = () => [];
-const foo4 = () => ["a"];
-
 function assignability1(): Set<string> {
   return new Set<string>(["foo"]);
 }
@@ -73,6 +92,10 @@ There are cases where the rule allows to return `any` to `unknown`.
 
 Examples of `any` to `unknown` return that are allowed.
 
+#### 예외
+
+함수가 unknown을 반환한다고 선언 한 후 any를 리턴하는 것은 허용됩니다.
+
 ```ts
 function foo1(): unknown {
   return JSON.parse(singleObjString); // Return type for JSON.parse is any.
@@ -81,6 +104,15 @@ function foo1(): unknown {
 function foo2(): unknown[] {
   return [] as any[];
 }
+```
+
+## running eslint
+
+```bash
+  39:3   warning  Unsafe return of an `any` typed value      @typescript-eslint/no-unsafe-return
+  42:3   warning  Unsafe return of an `any` typed value      @typescript-eslint/no-unsafe-return
+  45:3   warning  Unsafe return of an `any` typed value      @typescript-eslint/no-unsafe-return
+  47:20  warning  Unsafe return of an `any` typed value      @typescript-eslint/no-unsafe-return
 ```
 
 ## Related to
