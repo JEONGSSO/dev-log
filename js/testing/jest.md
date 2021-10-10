@@ -78,6 +78,12 @@ expect(add).toBe(5); // expect!
 spyFn.mockImplementation((a: number, b: number) => a - b);
 const sub = calculator.add(2, 3);
 
+const navigator = jest.spyOn(global, 'navigator', 'get');
+navigator.mockImplementation(() => ({
+  vendor: 'Google Inc.',
+  userAgent: 'Chrome',
+}));
+
 expect(sub).toBe(5); // fail!
 
 expect(spyFn).toBeCalledWith(2, 3); // expect!
