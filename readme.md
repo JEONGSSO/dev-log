@@ -2,7 +2,8 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
-| [TS] [jest init fn, mock fn](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/jest.md)                                                           | initial 함수와, 모킹함수 정리                                | 21/10/06      |
+| [TEST] [RTL tips](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/RTL_tip.md)                                                                   | React Testing Lib 겪었던 일들과 개념들                       | 21/10/21      |
+| [TEST] [jest init fn, mock fn](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/jest.md)                                                         | initial 함수와, 모킹함수 정리                                | 21/10/06      |
 | [TS] [tsconfig basic](https://github.com/JEONGSSO/dev-log/blob/master/TypeScript/tsconfig.md)                                                              | tsconfig 설정들 간략 정리                                    | 21/08/22      |
 | [CSS] [latest css](https://github.com/JEONGSSO/dev-log/blob/master/css/최신_css_5가지.md)                                                                  | 최신 css 기능 5가지                                          | 21/08/17      |
 | [GIT] [actions test](https://github.com/JEONGSSO/dev-log/blob/master/git/actions_test.md)                                                                  | github action 간단하게 써보기                                | 21/08/09      |
@@ -12,7 +13,7 @@
 | [JS] [material ui layout](https://github.com/JEONGSSO/dev-log/blob/master/js/material_ui/Layout.md)                                                        | Material ui 레이아웃 docs 정리                               | 21/07/07      |
 | [SQL] [sql data migration](https://github.com/JEONGSSO/dev-log/blob/master/sql/sql_tool_data_migration.md)                                                 | sql 툴을 사용하여 데이터 이관하기                            | 21/07/03      |
 | [BLOG] [academind](https://academind.com/)                                                                                                                 | 프로그래밍 학습 커뮤니티                                     | 21/06/27      |
-| [JS] [Testing Library common mistake](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/Testing_Library_common_mistake.md)                        | testing library 사용시 실수 했던 내용들                      | 21/06/21      |
+| [TEST] [Testing Library common mistake](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/Testing_Library_common_mistake.md)                      | testing library 사용시 실수 했던 내용들                      | 21/06/21      |
 | [JS] [udemy_2021_react_complete](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/udemy_complete/2.컨셉/정리.md)                          | udemy 2021 리액트 인강 공부                                  | 21/06/16      |
 | [CSS] [grid generator](https://layout.bradwoods.io/)                                                                                                       | css 그리드 레아이웃 직접 변경하고 확인 할 수 있는 사이트     | 21/06/15      |
 | [JS] [useRef MultiElement](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/useRef_multiple_elements.md)                                  | useRef 여러 엘리먼트 넣기                                    | 21/06/11      |
@@ -20,7 +21,7 @@
 | [JS] [클로저](https://github.com/JEONGSSO/dev-log/blob/master/js/프론트면접/클로저.md)                                                                     | 클로저 간단정리                                              | 21/06/09      |
 | [DEVELOPER] [브라우저 동작 원리](https://github.com/JEONGSSO/dev-log/blob/master/복습/브라우저_동작_원리.md)                                               | 브라우저 동작원리 정리                                       | 21/06/08      |
 | [JS] [javascript to know for react](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/javascript_to_know_for_react.md)                     | Kent C. Dodds의 리액트에서 유용햔 javascript 문법들 정리     | 21/06/07      |
-| [JS] [Front End Testing is For Everyone](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/FE_Testing_is_For_Everyone.md)                         | 프론트 엔드에서의 테스팅 종류들                              | 21/06/06      |
+| [TEST] [Front End Testing is For Everyone](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/FE_Testing_is_For_Everyone.md)                       | 프론트 엔드에서의 테스팅 종류들                              | 21/06/06      |
 | [JS] [weekly Archives for javascript, FE](https://github.com/JEONGSSO/dev-log/blob/master/js/성장/weekly_Archives.md)                                      | 매 주 자바스크립트 최신 트렌드 구독 서비스                   | 21/06/05      |
 | [JS] [Individual state](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/for_Individual_state.js)                                         | react 컴포넌트 개별 useState 추가하기                        | 21/06/04      |
 | [JS] [mobx methods](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/mobx/methods.md)                                                           | mobx 헷갈리는 사용법 정리                                    | 21/05/31      |
@@ -29,7 +30,7 @@
 | [CSS] [fontFace](https://github.com/JEONGSSO/dev-log/blob/master/css/Fontface.md)                                                                          | fonFace 속성 정리                                            | 21/05/17      |
 | [PHP] [sql fetch converter object](https://github.com/JEONGSSO/dev-log/blob/master/php/sql_fetch_converter_object.md)                                      | sql select array를 object로 변환                             | 21/05/16      |
 | [GIT] [git rebase author](https://github.com/JEONGSSO/dev-log/blob/master/git/author_변경_rebase.md)                                                       | git rebase로 author 변경하기                                 | 21/05/13      |
-| [JS] [storybook webpack5 troble shoot](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/storyBook_webpack_5_issue.md)                     | storybook과 webpack5 연동시 이슈 정리                        | 21/05/12      |
+| [TEST] [storybook webpack5 troble shoot](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/storyBook_webpack_5_issue.md)                   | storybook과 webpack5 연동시 이슈 정리                        | 21/05/12      |
 | [JS] [trend js](https://github.com/JEONGSSO/dev-log/blob/master/js/성장/트렌드.md)                                                                         | JS 트렌드 좋은 사이트 추천(zeroCho님 추천)                   | 21/05/10      |
 | [DEVELOPER] [클린코드 4,5장](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/클린코드/책정리.md#4주석)                                            | 클린코드 4,5장                                               | 21/05/09      |
 | [LINUX(WSL)] [wsl2 development environment](<https://github.com/JEONGSSO/dev-log/blob/master/linux(wsl)/wsl2_개발환경_구축.md>)                            | WSL2 개발환경 구축기, 이슈                                   | 21/05/08      |
@@ -39,7 +40,7 @@
 | [JS] [TOSS SLASH21 FE clean code](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/toss_SLASH21/실무_Frontend_Clean_code.md)                       | 실무에서 쓰는 프론트 클린코드 정리 (진유림 님)               | 21/05/03      |
 | [JS] [deep dive javascript 19](https://github.com/JEONGSSO/dev-log/blob/master/js/도서/deep_dive/19.프로토타입.md)                                         | deep dive 자바스크립트 프로토타입                            | 21/05/02      |
 | [PHP] [php shorthand if](https://github.com/JEONGSSO/dev-log/blob/master/php/ternary_operator_shortcut.md)                                                 | PHP 단축 문법 정리                                           | 21/04/30      |
-| [DEVELOPER] [TOSS SLASH21 test coverage](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/toss_SLASH21/테스트_커버리지.md)                         | 테스트 커버리지 100% 성공기 (이응준 님)                      | 21/04/29      |
+| [TEST] [TOSS SLASH21 test coverage](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/toss_SLASH21/테스트_커버리지.md)                              | 테스트 커버리지 100% 성공기 (이응준 님)                      | 21/04/29      |
 | [JS] [deep dive javascript 18](https://github.com/JEONGSSO/dev-log/blob/master/js/도서/deep_dive/18.함수와_일급객체.md)                                    | deep dive 자바스크립트 함수와 일급객체                       | 21/04/27      |
 | [SQL] [View Table](https://github.com/JEONGSSO/dev-log/blob/master/sql/VIEW_%ED%85%8C%EC%9D%B4%EB%B8%94.md)                                                | view 테이블 정리                                             | 21/04/26      |
 | [JS] [프로그래머스 모의고사 풀이](https://github.com/JEONGSSO/dev-log/blob/master/js/문제풀이/programmers/모의고사.js)                                     | 프로그래머스 모의고사                                        | 21/04/21      |
