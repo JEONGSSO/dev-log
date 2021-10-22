@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [TEST] [TDD BDD](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/TDD_BDD.md)                                                                    | TDD 및 BDD 간략정리                                          | 21/10/22      |
 | [TEST] [RTL tips](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/RTL_tip.md)                                                                   | React Testing Lib 겪었던 일들과 개념들                       | 21/10/21      |
 | [TEST] [jest init fn, mock fn](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/jest.md)                                                         | initial 함수와, 모킹함수 정리                                | 21/10/06      |
 | [TS] [tsconfig basic](https://github.com/JEONGSSO/dev-log/blob/master/TypeScript/tsconfig.md)                                                              | tsconfig 설정들 간략 정리                                    | 21/08/22      |
