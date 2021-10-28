@@ -72,3 +72,7 @@ const mocks: MockedResponse[] = [
 // mock result data랑 errors랑 같이 사용하게 되면 errors가 우선순위가 높다
 // errors 테스트할때 data는 안써도 무방하다.
 ```
+
+### mockData 제대로 적은 것 같은데 undefined만 뜨는 경우
+
+사용하는 곳에서 error를 콘솔로 찍어보면 예상 variables의 값들을 확인 할 수 있다.
