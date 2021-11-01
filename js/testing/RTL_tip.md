@@ -73,6 +73,7 @@ const mocks: MockedResponse[] = [
 // errors 테스트할때 data는 안써도 무방하다.
 ```
 
-### mockData 제대로 적은 것 같은데 undefined만 뜨는 경우
+## mock작성시 정확하게 적은 것 같은데 fetch data가 계속 undefined라면
 
-사용하는 곳에서 error를 콘솔로 찍어보면 예상 variables의 값들을 확인 할 수 있다.
+- lazy쿼리라면 해당쿼리를 실행했는지 확인
+- query에 error를 console.log 찍어서 해당 에러를 파악하여 수정
