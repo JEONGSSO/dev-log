@@ -6,7 +6,7 @@
 
 ```js
    $(window).unload(function () {
-      socket.emit() 
+      socket.emit()
    }
 
    // 크롬에서는 unload시 ajax사용을 막았다.
@@ -14,7 +14,7 @@
       $.ajax({
          type: 'POST',
          url : 'url',
-         data: { 
+         data: {
             data:data
          },
          async: false
@@ -30,16 +30,16 @@
       $.ajax({
          type: 'POST',
          url : 'url',
-         data: { 
+         data: {
             data:data
          },
          async: false
       });
    }
 
-   // 파폭과 ie에서는 unload시에 emit이 동작하지 않았다. 
+   // 파폭과 ie에서는 unload시에 emit이 동작하지 않았다.
    $(window).unload(function () {
-      socket.emit() 
+      socket.emit()
    }
 
 ```
@@ -47,21 +47,18 @@
 ## 크롬, 파폭
 
 ```js
-   window.addEventListener("unload", function logData() {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/log", false); // third parameter of `false` means synchronous
-      xhr.send(analyticsData); 
-   });
+window.addEventListener("unload", function logData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/log", false); // third parameter of `false` means synchronous
+  xhr.send(analyticsData);
+});
 
-   window.addEventListener("unload", function logData() {
-      navigator.sendBeacon("/log", analyticsData);
-   });
+window.addEventListener("unload", function logData() {
+  navigator.sendBeacon("/log", analyticsData);
+});
 
-   // IE에서 동작하지 않았기에 고려하지 않았다.
-   // IE를 고려하지 않으면 sendBeacon을 권장한다고 한다.
-
+// IE에서 동작하지 않았기에 고려하지 않았다.
+// IE를 고려하지 않으면 sendBeacon을 권장한다고 한다.
 ```
 
-https://developer.mozilla.org/ko/docs/Web/API/Navigator/sendBeacon
-
-
+https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon
