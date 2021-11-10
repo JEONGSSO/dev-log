@@ -91,3 +91,8 @@ const mocks: MockedResponse[] = [
 
 - lazy쿼리라면 해당쿼리를 실행했는지 확인
 - query에 error를 console.log 찍어서 해당 에러를 파악하여 수정
+
+## display 된 dom
+
+- snapshot에 고스란히 나온다
+- Role으로 찾을 수 있는 경우에 \*ByRole hidden 옵션으로 찾을 수 있다
