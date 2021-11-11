@@ -96,3 +96,43 @@ const mocks: MockedResponse[] = [
 
 - snapshot에 고스란히 나온다
 - Role으로 찾을 수 있는 경우에 \*ByRole hidden 옵션으로 찾을 수 있다
+
+## graphql에서 error나서 빈 태그 텍스트 노드만 렌더링 할때
+
+```tsx
+if (error) return <>ERROR</>;
+// 이렇게 하면 그냥 ERROR만 렌더링된다.
+
+if (error) return <div>ERROR</div>;
+// 이유는 찾아서 적을것.
+```
+
+## 파일 다운로드시 클릭이 되었는지 확인하는 테스트
+
+https://stackoverflow.com/questions/55020924/testing-function-that-starts-file-download-with-jest
+
+```js
+const downloadTextFile = (name, extension, content) => {
+  const link = document.createElement("a");
+  link.className = "download-helper";
+  link.download = name + "." + extension;
+  link.href = `data:application/${extension},` + escape(content);
+  link.click();
+};
+
+describe("downloadTextFile", () => {
+  it("should download the file", () => {
+    const link = {
+      click: jest.fn(),
+    };
+    jest.spyOn(document, "createElement").mockImplementation(() => link);
+
+    downloadTextFile("test-file", "txt", "hello world");
+
+    expect(link.className).toEqual("download-helper");
+    expect(link.download).toEqual("test-file.txt");
+    expect(link.href).toEqual("data:application/txt,hello%20world");
+    expect(link.click).toHaveBeenCalledTimes(1);
+  });
+});
+```
