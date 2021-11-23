@@ -1,4 +1,4 @@
-# Graph Ql (gql)
+# Graph Ql Language (gql)
 
 Structed Query Language(sql) 과 마찬가지로 쿼리 언어.
 
@@ -17,15 +17,17 @@ SELECT plot_id, species_id, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
       }
    }
 ```
+
 ## Graph Ql의 구조?
 
 ### 쿼리 / 뮤테이션
-   쿼리와 뮤테이션 응답 내용의 구조는 상당히 직관적!
 
-   굳이 쿼리와 뮤테이션을 나누는데 내부적으로 들어가면 차이가 없다고 한다.
+쿼리와 뮤테이션 응답 내용의 구조는 상당히 직관적!
 
-   쿼리는 데이터 읽기(R)
-   뮤테이션은 변조(CUD)하는데 사용한다는 개념적인 규약만 정해놓은 것 뿐.
+굳이 쿼리와 뮤테이션을 나누는데 내부적으로 들어가면 차이가 없다고 한다.
+
+쿼리는 데이터 읽기(R)
+뮤테이션은 변조(CUD)하는데 사용한다는 개념적인 규약만 정해놓은 것 뿐.
 
 ```
 요청
@@ -46,15 +48,18 @@ SELECT plot_id, species_id, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
 ```
 
 ### schema
+
        - 요청을 받았을 때 어떤 속성을 어떤 타입으로 반환할지에 대한 정의
 
 ### Resolver
+
          - 실제로 데이터를 반환하는 부분
          - rest api의 Controller부분과 비슷.
          - Resolver에서 원하는 데이터만을 쿼리로 작성해 요청을 보내면
          - Resolver에서 데이터를 응답으로 반환합니다.
 
 ## Graph Ql이 좋은이유 ?
+
 1. 서버사이드 gql app은 gql로 작성된 쿼리를 입력 받아 처리한 결과를 다시 **클라이언트로** 돌려준다.
 
 2. gql는 어떠한 특정 DB나 플랫폼에 종속적이지 않고, 네트워크 방식에도 종속적이지 않다.
@@ -66,17 +71,32 @@ SELECT plot_id, species_id, sex, weight, ROUND(weight / 1000.0, 2) FROM surveys;
 5. schema와 resolver를 한 번 짜놓으면 백엔드 개발자에게 API요청을 안해도 된다.
 6. redux에서 매번 하는 loading, error, success 처리가 간편하게 수행됨.
 7. PlayGround 라는 GUI 환경에서 많은 것을 직관적으로 확인할 수 있고, 이것저것 실험 해볼 수 있다.
-   
+
 ## Graph Ql의 어려움
+
 1. 캐시를 제어하고 최신화 하는데에 어려움을 겪을 수 있다. https://www.apollographql.com/docs/apollo-server/performance/caching/
    해결법
 
+## apollo client, Provider, inMemoryCache
 
+      - apollo client → 캐싱, fetch, 에러 핸들링등등 메서드 가지고있음
+      - provider → client로 부터 얻은 인스턴스를 props 받고 상호작용
+      - inMemoryCache → client가 반환하는 인스턴스를 사용하게 된다
 
+## useQuery
+
+- useQuery → client 접근하고 쿼리에서 받은 data와 상태를 만드는 hooks
+- localStorage에 저장하고, 캐싱된 애들은 fetching 요청조차 보내지 않음
+
+### 같은 요청에 대해 결과가 바뀌는 것은 어떻게 처리함?
+
+- 폴링 → 주기적으로 요청을하여 캐싱 데이터와 fetch 데이터를 동기화함 pollInterval 사용
+- refetch → useQuery에서 가져오는 refetch를 사용하여 달라진 점이 있나 확인함
 
 ### 출처
-   https://tech.kakao.com/2019/08/01/graphql-basic/
 
-   https://velog.io/@jayson/project-%EA%B0%9C.%EA%B3%A0.%EC%88%98-%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0
+https://tech.kakao.com/2019/08/01/graphql-basic/
 
-   https://medium.com/@han7096/graphql-%EA%B3%BC-apollo%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EB%A9%B0-%EC%A4%91%EA%B0%84-%EC%A0%95%EB%A6%AC-42981522b188
+https://velog.io/@jayson/project-%EA%B0%9C.%EA%B3%A0.%EC%88%98-%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0
+
+https://medium.com/@han7096/graphql-%EA%B3%BC-apollo%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EB%A9%B0-%EC%A4%91%EA%B0%84-%EC%A0%95%EB%A6%AC-42981522b188
