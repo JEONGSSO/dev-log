@@ -2,6 +2,8 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/Test-Driven-Development.md)                                                   | test-driven-devlopment 정리 2장                              | 21/11/30      |
+| [JS] [graph ql](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/graphql.md)                                                                    | graphQl remain                                               | 21/11/23      |
 | [JS] [beacon API](https://github.com/JEONGSSO/dev-log/blob/master/js/webApi/beacon.md)                                                                     | Beacon API 정리                                              | 21/11/02      |
 | [JS] [컴포넌트 다시 생각하기](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/feconf2021/컴포넌트_다시_생각하기.md)                               | 컴포넌트 다시 생각하기                                       | 21/10/31      |
 | [TEST] [TDD BDD](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/TDD_BDD.md)                                                                    | TDD 및 BDD 간략정리                                          | 21/10/22      |
