@@ -1,5 +1,5 @@
 ```js
-const obj = { limit: 10, offset: 10, type: 'notice' };
+const obj = { limit: 10, offset: 10, type: "notice" };
 const queryStr = (obj) => obj;
 
 console.log(Object.entries(obj)); // entries key, value의 배열을 만들어줌
@@ -37,36 +37,37 @@ queryStr(obj);
 Array.prototype.join 보다 다형성 높은 join 함수 만들기
 
 ```js
-
-const join = curry((sep = ',', iter) => reduce((a, b) => `${a}${sep}${b}`, iter))
+const join = curry((sep = ",", iter) =>
+  reduce((a, b) => `${a}${sep}${b}`, iter)
+);
 
 const queryStr = fp.pipe(
   Object.entries,
   fp.map(([k, v]) => `${k}=${v}`),
-  join('&'),
+  join("&"),
   log
 );
 
 // limit=10&offset=10&type=notice
 
 // 다형성
-function *a() {
+function* a() {
   yield 10;
   yield 11;
   yield 12;
   yield 13;
 }
 
-a().join() // 안 됨
+a().join(); // 안 됨
 
-join(', ', a()) // 10, 11, 12, 13
+join(", ", a()); // 10, 11, 12, 13
 
 // join도 iter 프로토콜을 따르고 있기 때문에
 
 const queryStr = fp.pipe(
   Object.entries,
   fp.lMap(([k, v]) => `${k}=${v}`),
-  join('&'),
+  join("&"),
   log
 );
 
@@ -74,6 +75,26 @@ const queryStr = fp.pipe(
 
 // 이렇게 Array에서만 사용할 수 있는 join 함수를
 // 이터러블 프로토콜을 사용하는 함수는 사용 가능하게 구현을 하였다.
+```
 
+```ts
+type MakeQueryStringForObject = Record<string, unknown>;
 
+const makeQueryStringForObject = (object: MakeQueryStringForObject) =>
+  Object.entries(object)
+    .map(([k, v]) => `${k}=${v}`)
+    .join("&");
+
+export { makeQueryStringForObject };
+```
+
+```ts
+// 쿼리스트링 object 파서
+const queryStringParser = (queryString: string) =>
+  queryString
+    .slice(1)
+    .split("&")
+    .map((v) => v.split("="))
+    .map(([k, v]) => ({ [k]: v }))
+    .reduce((acc, val) => ({ ...acc, ...val }), {});
 ```
