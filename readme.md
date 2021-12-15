@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [SQL] [single, composite index](https://github.com/JEONGSSO/dev-log/blob/master/sql/sql_index.md)                                                          | single, composite index 비교                                 | 21/12/13      |
 | [REACT] [React router dom](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/react_router_dom_v6.md)                                       | react router dom v6 변경점 간단히                            | 21/12/09      |
 | [REACT] [React-native](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/native/개발환경구축.md)                                           | mac rn 개발환경 구축                                         | 21/12/06      |
 | [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/js/도서/test-Driven-Development/2_타락한_객체.md)                                        | test-driven-devlopment 정리 2장                              | 21/11/30      |
