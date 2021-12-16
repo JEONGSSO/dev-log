@@ -2,10 +2,11 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/js/도서/test-Driven-Development/3.모두를_위한_평등.md)                                   | test-driven-devlopment 정리 3장                              | 21/12/16      |
 | [SQL] [single, composite index](https://github.com/JEONGSSO/dev-log/blob/master/sql/sql_index.md)                                                          | single, composite index 비교                                 | 21/12/13      |
 | [REACT] [React router dom](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/react_router_dom_v6.md)                                       | react router dom v6 변경점 간단히                            | 21/12/09      |
 | [REACT] [React-native](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/react/native/개발환경구축.md)                                           | mac rn 개발환경 구축                                         | 21/12/06      |
-| [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/js/도서/test-Driven-Development/2_타락한_객체.md)                                        | test-driven-devlopment 정리 2장                              | 21/11/30      |
+| [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/js/도서/test-Driven-Development/2.타락한_객체.md)                                        | test-driven-devlopment 정리 2장                              | 21/11/30      |
 | [JS] [graph ql](https://github.com/JEONGSSO/dev-log/blob/master/js/기술공부/graphql.md)                                                                    | graphQl remain                                               | 21/11/23      |
 | [JS] [beacon API](https://github.com/JEONGSSO/dev-log/blob/master/js/webApi/beacon.md)                                                                     | Beacon API 정리                                              | 21/11/02      |
 | [JS] [컴포넌트 다시 생각하기](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/feconf2021/컴포넌트_다시_생각하기.md)                               | 컴포넌트 다시 생각하기                                       | 21/10/31      |
