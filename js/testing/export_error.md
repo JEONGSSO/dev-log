@@ -7,7 +7,8 @@ transformIgnorePatterns를 추가 하는 것으로 수정 할 수 있다.
 ...
 "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)"
+      "node_modules/(?!@material)" // @material으로 시작하는 애들 무시
+      "node_modules/" // 근데 이렇게 같은 겹치는 경로를 추가하면 얘만 적용된다
     ]
   }
   ...
