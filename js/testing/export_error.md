@@ -16,4 +16,6 @@ transformIgnorePatterns를 추가 하는 것으로 수정 할 수 있다.
 
 ### 참조
 
+https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
+
 https://stackoverflow.com/questions/49263429/jest-gives-an-error-syntaxerror-unexpected-token-export
