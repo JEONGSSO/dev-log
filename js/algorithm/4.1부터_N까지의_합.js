@@ -1,9 +1,6 @@
-const solution = (num) => {
-  let sum = 0;
-  for (let a = 0; a <= num; a++) {
-    sum += a;
-  }
-  return sum;
-};
+// 가우스 공식
+// 구할 숫자 X 첫 숫자 1 + 마지막 숫자 1 / 2
+// 시간복잡도 O(1)
+const solution = (num) => (num * (num + 1)) / 2;
 
-console.log(solution(3));
+console.log(solution(10));

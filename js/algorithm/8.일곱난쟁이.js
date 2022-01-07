@@ -1,11 +1,12 @@
 const solution = (arr) => {
   const remain = arr.reduce((acc, val) => acc + val) - 100;
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
-      if (i !== j && arr[i] + arr[j] === remain) {
+  // 시간복잡도 O(N^2)
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === remain) {
+        arr.splice(j, 1); // 뒤에껄 항상 먼저 제거해라
         arr.splice(i, 1);
-        arr.splice(j, 1);
         return arr;
       }
     }
