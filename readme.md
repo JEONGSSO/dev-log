@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [DEVELOPER] [NGINX](https://github.com/JEONGSSO/dev-log/blob/master/nginx/gzip.md)                                                                         | response header gzip 정리                                    | 22/04/04      |
 | [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/test-Driven-Development/5.솔직히_말하자면.md)                                   | test-driven-devlopment 정리 5장                              | 22/01/05      |
 | [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/test-Driven-Development/4.프라이버시.md)                                        | test-driven-devlopment 정리 4장                              | 21/12/29      |
 | [JEST] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/js/testing/export_error.md)                                                                   | jest transform ignore                                        | 21/12/22      |
