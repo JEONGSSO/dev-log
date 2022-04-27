@@ -2,6 +2,7 @@
 
 | 제목                                                                                                                                                       | 내용                                                         | 업데이트 날짜 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| [DEVELOPER] [FP](https://github.com/JEONGSSO/dev-log/blob/master/함수형/쏙쏙_함수형_코딩/index.md)                                                         | 도서 쏙쏙 함수형 코딩 기록                                   | 22/04/27      |
 | [DEVELOPER] [FP](https://github.com/JEONGSSO/dev-log/blob/master/함수형/JS함수합성.md)                                                                     | JavaScript Composition                                       | 22/04/18      |
 | [DEVELOPER] [NGINX](https://github.com/JEONGSSO/dev-log/blob/master/nginx/gzip.md)                                                                         | response header gzip 정리                                    | 22/04/04      |
 | [DEVELOPER] [TDD](https://github.com/JEONGSSO/dev-log/blob/master/자기계발/test-Driven-Development/5.솔직히_말하자면.md)                                   | test-driven-devlopment 정리 5장                              | 22/01/05      |
