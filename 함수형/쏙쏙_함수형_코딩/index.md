@@ -117,3 +117,6 @@ bad쿠폰은 안씀
 너무 세세하게 분리하는것도 좋지 않으니 타협점을 찾아야 한다.
 
 데이터인 이메일 리스트와 쿠폰 리스트를 조합하여 추천인 계산
+
+이메일 보내기 까지의 로직 연습장
+https://github.com/JEONGSSO/udemy_react_complete_learn/tree/main/src/z_playground/functional_coding
