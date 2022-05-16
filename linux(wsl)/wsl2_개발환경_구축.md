@@ -1,3 +1,12 @@
+## windows 11에서 다운로드 하는 법
+
+명령 프롬프트에 들어가서 관리자 권한으로 실행 후
+
+wsl --install 명령어 실행
+
+만약 실패한다면 windows 기능/추가에 들어가서
+가상화(hyper-v)를 켜주면 된다
+
 ## wsl(windows subSystem for linux) 설치
 
 [ms 공식 문서](https://docs.microsoft.com/ko-kr/windows/wsl/install-win10)나 다른분들이 블로그해놓은 글을따라 하면 된다.
