@@ -120,3 +120,13 @@ bad쿠폰은 안씀
 
 이메일 보내기 까지의 로직 연습장
 https://github.com/JEONGSSO/udemy_react_complete_learn/tree/main/src/z_playground/functional_coding
+
+- 함수 안에 액션이 들어가 있으면 그 함수는 전체적으로 액션이 된다.
+
+- 전역 변수를 읽는것은 액션
+
+- 암시적 입력과 암시적 출력을 없애자.
+  - 입력 ex) 인자가 아닌 (전역)변수를 읽는것
+    - 전역 변수라도 인자로 넘겨서 부수효과를 최소화
+    - call by ref를 직접 변경하는것은 금물 복사본을 변경 후 리턴
+  - 출력 ex) 함수 리턴 값을 명시
