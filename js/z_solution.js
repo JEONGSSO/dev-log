@@ -21,3 +21,26 @@ function validAnagram(string1, string2) {
 validAnagram("dksk", "skdk");
 validAnagram("good", "gods");
 validAnagram("bad", "dab");
+
+// 문제 낸 사람이 낸 솔루션 O(n)두개로 끝냄
+function validAnagramz(string1, string2) {
+  if (string1.length !== string2.length) return false;
+
+  const string1Obj = {};
+  for (const val of string1) {
+    string1Obj[val] = (string1Obj[val] || 0) + 1;
+  }
+
+  for (const str of string2) {
+    if (!string1Obj[str]) {
+      return false;
+    } else {
+      string1Obj[str] -= 1;
+    }
+  }
+  return true;
+}
+
+console.log(validAnagramz("dksk", "skdk"));
+console.log(validAnagramz("good", "gods"));
+console.log(validAnagramz("bad", "dab"));
