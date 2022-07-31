@@ -286,3 +286,41 @@ const Nothing = Symbol("nothing");
 type Nothing = typeof Nothing;
 type Maybe<T> = T | Nothing;
 ```
+
+#### 튜플
+
+// 튜플 useState, dataRange 등 배열이 갯수가 정해진거에 사용하면 좋다
+
+#### unknown
+
+- 타입을 모르는 상태에서 사용 초기화 할때 사용하는 듯
+
+```ts
+let a: number;
+let b: any;
+let c: unknown;
+const d = 2;
+let e: string;
+a = b;
+a = c;
+c = 2;
+
+e = d as unknown as string;
+// 초기화 할때
+
+const tt = (): undefined => {
+  return undefined;
+};
+
+console.log(tt());
+```
+
+#### never
+
+- 함수의 끝에 도달 할 수 없을때
+- ex) 함수 도중 throw 하는 경우
+
+#### void
+
+- 아무것도 반환하지 않을때 사용
+- early return 및, 리턴문 없을때
