@@ -15,4 +15,39 @@ class 만들기
 
 ```ts
 
+class Good {
+  aaa = string[] = [];
+
+
+  addAaa(aaa: string) {
+    this.aaa.push(aaa)
+  }
+
+
+}
+
+const good = Good();
+
+good.addAaa('kim')
+good.addAaa('lee')
+
+// aaa를 private로 바꾸면 이렇게 할당하는 것을 컴파일 에러가 출력됨
+good.aaa[2] = 'park'
+
+
+class Product {
+  private a: boolean;
+
+  constructor(public name: string, public fee: number) {
+    // public에 있는 애들은 a랑 같은 스코프에 위치함
+    this.a = true
+  }
+}
+
+```
+
+상속
+
+```ts
+
 ```
