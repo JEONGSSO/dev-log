@@ -1,4 +1,6 @@
 // Type의 약자로 다른 언어에서도 제네릭을 선언할 때 관용적으로 많이 사용된다.
+
+// 제네릭 만들기
 const test1 = <T, U>(objA: T, objB: U) => {
   return Object.assign(objA, objB);
 };
@@ -7,7 +9,7 @@ function test2<T, U>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
 
-class Test<T extends object, U extends object> {
+class Test<T, U> {
   assign(objA: T, objB: U) {
     return Object.assign(objA, objB);
   }
@@ -40,17 +42,17 @@ const countAndDescribe = <T extends Lengthy>(elem: T) => {
     text = "1개 있음";
   }
 
-  return;
+  return text;
 };
 
 ///////////////////////////////////////////////////////////////
 
 const keyofTestObj = { name: "kim" };
-const keyofTest = <T extends object, U extends keyof T>(obj: T, key: U) => {
+const keyofTest = <T, U extends keyof T>(obj: T, key: U) => {
   return `value is ${obj[key]}`;
 };
 
-console.log(keyofTest({}, "name"));
+console.log(keyofTest({ name: "kim" }, "name"));
 // 여기서 빈객체를 넣으면 key가 아무것도 없으므로 무엇을 넣어도 에러남
 
 console.log(keyofTest(keyofTestObj, "name"));
@@ -67,7 +69,7 @@ function logText<T>(text: T) {
   return text;
 }
 const myString: GenericLogTextFn = logText; // Okay
-myString("zz").toLocaleLowerCase();
+myString("sa").toLocaleLowerCase();
 
 // 해당 인터페이스를 적용 할 함수에서 제네릭으로 상속하게되면 안됨
 function logTextt<T>(text: T) {
@@ -87,6 +89,8 @@ function logTexttt<T>(text: T): T {
 const stringGeneric: GenericLogTextFn2<string> = logText; // Okay
 stringGeneric("13");
 
+/////////////////////////////////////////////
+
 class DataStorage<T> {
   private data: T[] = [];
 
@@ -96,7 +100,7 @@ class DataStorage<T> {
 
   removeItem(item: T) {
     const removeIndex = ~this.data.indexOf(item);
-    if (~removeIndex) return; // removeIndex === -1
+    if (!removeIndex) return; // removeIndex === -1
     this.data.splice(removeIndex, 1);
   }
 
@@ -105,10 +109,10 @@ class DataStorage<T> {
   }
 }
 
-const objStorage = new DataStorage<object>();
 const kimObj = { name: "kim" }; // 같은 객체 같은 주소를 넣어주어야 의도한대로 동작함
+const objStorage = new DataStorage<object>();
 
-objStorage.addItem(123);
+// objStorage.addItem('123');
 objStorage.addItem({ name: "kim" }); // objStorage.addItem(kimObj)
 objStorage.addItem({ name: "good" });
 objStorage.removeItem({ name: "kim" }); // objStorage.removeItem(kimObj)
@@ -144,7 +148,7 @@ const courseValues: CourseGoal = {
 
 const course = createCourseGoal(courseValues);
 
-console.log(createCourseGoal(courseValues).title);
+console.log(createCourseGoal(courseValues).completeUntil);
 
 ///////////////////////////////////
 
@@ -179,11 +183,24 @@ class DataStorage2 {
   }
 }
 
-const unionTest = (union: string | number | boolean) => union;
+const unionTest = (union: string | number | boolean) => {
+  if (typeof union === "string") {
+    // union.
+  } else if (typeof union === "number") {
+    // union.
+  } else {
+    // union
+  }
+
+  return union;
+};
 const zzzzz = unionTest(1);
 // zzzzz.
 // 메서드 사용안됨
 
+/**
+ * @deprecated
+ */
 const genericTest = <T>(union: T) => union;
 
 const zzzz = genericTest("abc");
