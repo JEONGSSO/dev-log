@@ -2,7 +2,7 @@
 
 - Apollo Client 3버전 부터 사용하지 않는 캐시데이터를 선택적으로 제거 할 수 있음.
 - cache.gc 메서드는 대부분의 상황에 적합하다,
-- cache.evict 메서드는 더 세말하게 제어해야 하는 상황에 사용하기 좋다.
+- cache.evict 메서드는 더 세밀하게 제어해야 하는 상황에 사용하기 좋다.
 
 이 메서드들은 ApolloClient가 아닌 InMemoryCache에서 사용 할 수 있다.
 
@@ -431,6 +431,8 @@ const cache = new InMemoryCache({
 
   name과 dateOfBirth를 병합하여 캐시하라고 할 수 있다.
 
+  ## 여기부터
+
   ```js
   const cache = new InMemoryCache({
     typePolicies: {
@@ -538,42 +540,44 @@ const cache = new InMemoryCache({
 - 이런 경우 favoriteBook authors 필드는 더 이상 단일 객체가 아니라 배열이므로
 - 교체로 인한 데이터 손실을 방지 하기위해 사용자 지정 병합 함수를 적절하게 쓰는것이 중요하다.
 
-  ```js
-  const cache = new InMemoryCache({
-  typePolicies: {
-    Book: {
-      fields: {
-        authors: {
-          // readField 헬퍼 함수는 author.name직접 접근하는것보다 강력함
-          // author가 캐시의 다른 위치에 있는 데이터를 참조하는 가능성도 포함하기 때문이다.
-          // 이 경우 Author 유형으로 keyFields를 지정할 수 있다.
-          merge(existing: any[], incoming: any[], { readField, mergeObjects }) {
-            const merged: any[] = existing ? existing.slice(0) : [];
-            const authorNameToIndex: Record<string, number> = Object.create(null);
-            if (existing) {
-              existing.forEach((author, index) => {
-                authorNameToIndex[readField<string>("name", author)] = index;
-              });
-            }
-            incoming.forEach(author => {
-              const name = readField<string>("name", author);
-              const index = authorNameToIndex[name];
-              if (typeof index === "number") {
-                // Merge the new author data with the existing author data.
-                merged[index] = mergeObjects(merged[index], author);
-              } else {
-                // First time we've seen this author in this array.
-                authorNameToIndex[name] = merged.length;
-                merged.push(author);
-              }
+---
+
+```js
+const cache = new InMemoryCache({
+typePolicies: {
+  Book: {
+    fields: {
+      authors: {
+        // readField 헬퍼 함수는 author.name직접 접근하는것보다 강력함
+        // author가 캐시의 다른 위치에 있는 데이터를 참조하는 가능성도 포함하기 때문이다.
+        // 이 경우 Author 유형으로 keyFields를 지정할 수 있다.
+        merge(existing: any[], incoming: any[], { readField, mergeObjects }) {
+          const merged: any[] = existing ? existing.slice(0) : [];
+          const authorNameToIndex: Record<string, number> = Object.create(null);
+          if (existing) {
+            existing.forEach((author, index) => {
+              authorNameToIndex[readField<string>("name", author)] = index;
             });
-            return merged;
-          },
+          }
+          incoming.forEach(author => {
+            const name = readField<string>("name", author);
+            const index = authorNameToIndex[name];
+            if (typeof index === "number") {
+              // Merge the new author data with the existing author data.
+              merged[index] = mergeObjects(merged[index], author);
+            } else {
+              // First time we've seen this author in this array.
+              authorNameToIndex[name] = merged.length;
+              merged.push(author);
+            }
+          });
+          return merged;
         },
       },
     },
   },
-  ```
+},
+```
 
 - 기존 값을 들어오는 값으로 덮어쓰는 대신 중복된 author이름을 확인하여 반복되는 작성자 객체의 필드를 병합함.
 - 예제에서 볼 수 있듯이 병합 함수는 상당히 복잡해질 수 있는데 재사용 가능하게 헬퍼 함수로 추출할 수 있다
@@ -593,6 +597,8 @@ const cache = new InMemoryCache({
   ```
 
 - 추상화하여 내부 구현이 얼마나 복잡한지는 상관없고, 일관되게 유지할 수 있다.
+
+---
 
 #### [Handling pagination(페이징 처리)](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#handling-pagination)
 
@@ -761,6 +767,8 @@ const cache = new InMemoryCache({
 
   - 결과를 캐시에 기록하지 않고 서버에 요청을 보내기 전에 캐시 확인도 하지 않음.
 
+---
+
 ### [Persisting the cache](https://www.apollographql.com/docs/react/caching/advanced-topics/#persisting-the-cache)
 
 - AsyncStorage 또는 localStorage를 사용하는 경우에 InMemoryCache를 유지 및 재수화(rehydrate, 원상 복구)할 수 있다.
@@ -772,6 +780,8 @@ const cache = new InMemoryCache({
 
   - persistCache은 기본적으로 비동기이며 Promise를 반환함.
   - 자세히는 라이브러리 docs 확인
+
+---
 
 ### [Resetting the cache](https://www.apollographql.com/docs/react/caching/advanced-topics/#resetting-the-cache)
 
@@ -790,6 +800,8 @@ export default withApollo(
   })(Profile)
 );
 ```
+
+---
 
 ### [Responding to cache resets](https://www.apollographql.com/docs/react/caching/advanced-topics/#responding-to-cache-resets)
 
@@ -839,6 +851,10 @@ export default withApollo(
 
   export default withApollo(Foo);
   ```
+
+---
+
+## 상속이 있다
 
 ### [TypePolicy inheritence](https://www.apollographql.com/docs/react/caching/advanced-topics/#typepolicy-inheritence)
 
@@ -903,6 +919,8 @@ export default withApollo(
 
 - mutation이 완료 된 후 특정 쿼리를 실행하기 위해 refetchQueries를 사용할 수 있다.
 
+---
+
 ### [Cache redirects](https://www.apollographql.com/docs/react/caching/advanced-topics/#cache-redirects)
 
 - 쿼리가 캐시에 이미 있는 데이터를 다른 참조로 요청하는 경우도 있다.
@@ -966,6 +984,8 @@ export default withApollo(
 
   상세보기의 쿼리가 실행 전 목록 보기의 쿼리에 없는 Book 필드를 가져오면 캐시가 불완전하다고 간주해 네트워크 요청을하고 전체 쿼리를 실행함
 
+---
+
 ### [Pagination utilities](https://www.apollographql.com/docs/react/caching/advanced-topics/#pagination-utilities)
 
 - fetchMore
@@ -979,16 +999,16 @@ export default withApollo(
   - 이러한 쿼리는 초기 쿼리와 매개 변수 모두에 의해 캐시되므로 나중에 캐시에서 페이지화된 쿼리를 사용할때 문제가 발생함
   - 이런 문제를 해결하기 위해 1.6버전 이후에 나온 @connection를 사용함
 
-  ```js
-  const query = gql`
-    query Feed($type: FeedType!, $offset: Int, $limit: Int) {
-      feed(type: $type, offset: $offset, limit: $limit)
-        @connection(key: "feed", filter: ["type"]) {
-        ...FeedEntry
-      }
+```js
+const query = gql`
+  query Feed($type: FeedType!, $offset: Int, $limit: Int) {
+    feed(type: $type, offset: $offset, limit: $limit)
+      @connection(key: "feed", filter: ["type"]) {
+      ...FeedEntry
     }
-  `;
-  ```
+  }
+`;
+```
 
 - 저장소 키를 지정하는 키 매개 변수를 제공하고, 옵션으로 filter매게 변수를 포함하여 키에 포함 할 인수 이름들로 사용할 수 있음.
 
