@@ -8,20 +8,21 @@ through possibilities exposed by the server.
 
 - 마지막 몇 장에서 우리는 그래프 GraphQL이 어떻게 생겨났고 어떻게 쿼리를 사용했는지 보았으며,
 
-타입 시스템을 사용하여 여러 클라이언트에서 다른 케이스들을 통해 사용사례를 볼 수 있었습니다.
+  타입 시스템을 사용하여 여러 클라이언트에서 다른 케이스들을 통해 사용사례를 볼 수 있었습니다.
 
 We also covered what we should be thinking about when designing a GraphQL schema.
-While we discussed the concepts, we didn’t talk about how GraphQL servers are built and implemented in practice. In this chapter,
 
-- 또한 우리가 GraphQL 스키마를 어떻게 설계 해야하는지 생각하고, 콘셉트에 대해 논의하면서 실제로
+- 또한 우리가 GraphQL 스키마를 어떻게 설계 해야하는지 생각하였습니다.
 
-graphQL서버가 구축되고 구현되는 방법에 대해서는 언급하지 않았습니다.
+While we discussed the concepts, we didn’t talk about how GraphQL servers are built and implemented in practice.
+
+- 콘셉트에 대해 논의하는 동안 실제로 graphQL서버가 구축되고 구현되는 방법에 대해서는 언급하지 않았습니다.
 
 In this chapter, we’ll see the main concepts in implementing GraphQL servers and a few examples.
 
 - 이번 챕터에서는 GraphQL 서버 메인 콘셉트를 몇 가지 예제를 통해 살펴보겠습니다.
 
-Every single languag- specific library has a different way of doing things, so we’ll be focused more on principles rather than specific ways of doing things.
+Every single language specific library has a different way of doing things, so we’ll be focused more on principles rather than specific ways of doing things.
 
 - 모든 언어별 라이브러리 구현방법은 제각각이라 구체적인 방법보다는 원칙에 집중하여 설명하겠습니다.
 
@@ -48,19 +49,22 @@ At its core, building a GraphQL server mainly requires three main things.
 
 Almost every single language has a GraphQL server implementation, and all of them let us achieve these two elements in different ways.
 
-- 거의 모든 단일 언어는 GraphQl 서버 구현을 가지고 있으며, 두 가지 요소를 다른 방식으로 구현할 수 있습니다.
+- 거의 모든 단일 언어는 GraphQl 서버 구현을 할 수 있고, 두 가지 요소를 다른 방식으로 구현할 수 있습니다.
 
 A user will define both the type system and runtime behavior for an API, and the library will usually take care of implementing the GraphQL spec including the execution algorithm.
 
 - 사용자는 API에 대한 타입시스템과 런타임 동작을 모두 정의하며, 일반적으로 실행 알고리즘을 포함한 GraphQl 사양을 구현합니다.
 
-To fulfill queries, we need more than a type system, we need behaviors and the data behind this type system. In GraphQL the concept used to fulfill data for a certain field is called a resolver. At their core resolvers are really just simple functions
+To fulfill queries, we need more than a type system, we need behaviors and the data behind this type system.
 
-- 쿼리를 실행하기 위해선 타입 시스템과, 쿼리의 행동, 타입 시스템뒤의 데이터들이 필요합니다.
+- 쿼리를 실행하기 위해선 타입 시스템이 필요하고 더 나아가 타입 시스템 뒤의 행동, 데이터들이 필요합니다.
 
-In GraphQL the concept used to fulfill for a certain field is called a resolver. At their core resolvers are really just simple functions
+In GraphQL the concept used to fulfill for a certain field is called a resolver.
 
 - GraphQL에선 특정 필드를 실행하는 개념을 리졸버라고 합니다.
+
+At their core resolvers are really just simple functions
+
 - 코어 리졸버들은 단순한 일을합니다.
 
 ```js
@@ -76,6 +80,8 @@ A resolver is in charge of resolving the data for a single field.
 The GraphQL engine will call the resolver for a particular field once it gets to this point.
 
 - 예제를 보면 GraphQL엔진이 특정 필드의 리졸버를 호출합니다.
+
+In fact, the basic execution of a GraphQL query often resembles a simple depth-first search of a tree-like data structure
 
 - 실제로 GraphQL 쿼리의 기본 실행은 트리 구조의 단순한 깊이 우선검색과 유사합니다.
 
