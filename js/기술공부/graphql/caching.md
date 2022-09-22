@@ -468,7 +468,7 @@ const cache = new InMemoryCache({
   });
   ```
 
-- 캐시가 동일한 ID를 가진 두 Book 객체의 작성자 객체를 안전하게 병합 할 수 있다.
+- 캐시가 동일한 ID를 가진 두 Book 객체의 author 객체를 안전하게 병합 할 수 있다.
 
 ##### [Configuring merge functions for types rather than fields(필드가 아닌 유형에 대한 병합 함수 구성하기)](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#configuring-merge-functions-for-types-rather-than-fields)
 
@@ -498,17 +498,6 @@ const cache = new InMemoryCache({
 - Author가 Book외에 다른 많은 필드에 사용될 수 있는 경우 더 간단하고 쉽게 관리할 수 있다.
 
 - merge true일때 병합 가능한 객체는 동일한 상위 객체의 동일한 필드를 차지하는 기존 객체와 병합됨 (단, \_\_typename이 동일한경우만)
-  ```js
-  {
-    "__typename": "Book",
-    "id": "abc123",
-    "author": {
-      "__typename": "Author",
-      "name": "George Eliot",
-      "dateOfBirth": "1819-11-22",
-    }
-  }
-  ```
 - \_\_typename이 동일하지 않은경우도 사용자 정의 병합 함수를 작성해서 원하는대로 할 수 있음
 
 ##### [Merging arrays of non-normalized objects(정규화 되지 않은 객체의 배열 병합)](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#merging-arrays-of-non-normalized-objects)
@@ -540,7 +529,7 @@ const cache = new InMemoryCache({
 - 이런 경우 favoriteBook authors 필드는 더 이상 단일 객체가 아니라 배열이므로
 - 교체로 인한 데이터 손실을 방지 하기위해 사용자 지정 병합 함수를 적절하게 쓰는것이 중요하다.
 
----
+# \#
 
 ```js
 const cache = new InMemoryCache({
@@ -598,7 +587,7 @@ typePolicies: {
 
 - 추상화하여 내부 구현이 얼마나 복잡한지는 상관없고, 일관되게 유지할 수 있다.
 
----
+# \#
 
 #### [Handling pagination(페이징 처리)](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#handling-pagination)
 
@@ -619,6 +608,7 @@ typePolicies: {
           tasks: {
             merge(existing: any[], incoming: any[], { args }) {
               const merged = existing ? existing.slice(0) : [];
+              // existing.slice(0)는 [...existing] 과 같음
               // Insert the incoming elements in the right places, according to args.
               // args에 들어오는 값을 올바른 위치에 삽입해야함
               const end = args.offset + Math.min(args.limit, incoming.length);
@@ -749,7 +739,7 @@ const cache = new InMemoryCache({
 
 - 이제까지 배웠던 API들의 레퍼런스
 
----
+# \#
 
 ## [Advanced topics on caching in Apollo Client](https://www.apollographql.com/docs/react/caching/advanced-topics/)
 
@@ -767,7 +757,7 @@ const cache = new InMemoryCache({
 
   - 결과를 캐시에 기록하지 않고 서버에 요청을 보내기 전에 캐시 확인도 하지 않음.
 
----
+# \#
 
 ### [Persisting the cache](https://www.apollographql.com/docs/react/caching/advanced-topics/#persisting-the-cache)
 
@@ -781,7 +771,7 @@ const cache = new InMemoryCache({
   - persistCache은 기본적으로 비동기이며 Promise를 반환함.
   - 자세히는 라이브러리 docs 확인
 
----
+# \#
 
 ### [Resetting the cache](https://www.apollographql.com/docs/react/caching/advanced-topics/#resetting-the-cache)
 
@@ -801,7 +791,7 @@ export default withApollo(
 );
 ```
 
----
+# \#
 
 ### [Responding to cache resets](https://www.apollographql.com/docs/react/caching/advanced-topics/#responding-to-cache-resets)
 
@@ -852,7 +842,7 @@ export default withApollo(
   export default withApollo(Foo);
   ```
 
----
+# \#
 
 ## 상속이 있다
 
@@ -919,7 +909,7 @@ export default withApollo(
 
 - mutation이 완료 된 후 특정 쿼리를 실행하기 위해 refetchQueries를 사용할 수 있다.
 
----
+# \#
 
 ### [Cache redirects](https://www.apollographql.com/docs/react/caching/advanced-topics/#cache-redirects)
 
@@ -984,7 +974,7 @@ export default withApollo(
 
   상세보기의 쿼리가 실행 전 목록 보기의 쿼리에 없는 Book 필드를 가져오면 캐시가 불완전하다고 간주해 네트워크 요청을하고 전체 쿼리를 실행함
 
----
+# \#
 
 ### [Pagination utilities](https://www.apollographql.com/docs/react/caching/advanced-topics/#pagination-utilities)
 
