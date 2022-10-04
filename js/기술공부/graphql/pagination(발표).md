@@ -259,3 +259,74 @@ const cache = new InMemoryCache({
   },
 });
 ```
+
+https://github.com/apollographql/apollo-client/blob/main/src/utilities/policies/pagination.ts#L95
+
+헬퍼 함수 relayStylePagination 만들어 두었음.
+
+https://relay.dev/docs/guides/graphql-server-specification/#further-reading
+
+실제로 Relay에서 edges, pageInfo를 사용하는 예제
+
+- relayStylePagination는
+  - Apollo Client를 사용하여 릴레이 pagination api를 사용 할 때 relayStylePagination는 처음으로 고려해볼만한 좋은 헬퍼함수이다.
+  - relayStylePagation함수는 Args를 무시하고, 사용가능 데이터를 반환하는 read 함수로 필드 정책을 생성함.
+  - fetchMore에서 relayStylePagation를 더 쉽게 사용 가능함.
+  - Non-paginated read function임
+    - offset, limit 인수를 무시하도록 선택할 수 있고
+    - 캐시에 있는대로 전체 목록을 반환함.
+
+# Key arguments in Apollo Client
+
+- keyArgs 구성과 관련된 고려 사항에 대해 알아보기 전에 Corepagation API를 읽는 것이 좋습니다.
+
+- Apollo Client 캐시는 단일 스키마 필드에 대해 여러 항목을 저장할 수 있습니다.
+
+```graphql
+type Query {
+  # Returns whichever User object corresponds to `id`
+  user(id: ID!): User
+}
+```
+
+```js
+{
+  'ROOT_QUERY': {
+    'user({"id":"1"})': {
+      '__ref': 'User:1' // storage key
+    },
+    'user({"id":"2"})': {
+      '__ref': 'User:2' // storage key
+    }
+  }
+}
+```
+
+- 위에 표시된 것처럼 각 항목의 storage key에는 해당 인수 값이 포함됩니다.
+
+  즉, 필드의 인수가 쿼리 간에 다르면 storage key도 다르고, 고유한 캐시 항목을 생성합니다.
+
+- 인수가 없으면 storage key 해당필드 이름만 됨 ex) '\_\_ref': 'User'
+
+- 캐시는 데이터를 날리지 않고 서로 다른 인수 조합(id 1, 2)에 대해 반환된 값을 병합할 수 있는지 여부를 알 수 없다.
+- 그러므로 캐시는 ID 1과 2의 User에 대한 쿼리 결과를 병합해서는 안된다.
+
+### [Pagination issues](https://www.apollographql.com/docs/react/pagination/key-args#pagination-issues)
+
+### Setting keyArgs
+
+## Supported values for keyArgs
+
+### keyArgs array
+
+### keyArgs function (advanced)
+
+## Which arguments belong in keyArgs?
+
+### Using all arguments
+
+### Using no arguments
+
+### Summary
+
+## The @connection directive
