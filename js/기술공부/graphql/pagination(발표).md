@@ -116,13 +116,11 @@ const cache = new InMemoryCache({
 
   리스트를 생성한 정렬 또는 필터링 위치도 알아야 할 수 있다.
 
-  이런 경우 커서가 목록에 요소에 속하지 않으므로 커서는 목록과 별도로 사용됨
-
 ```js
 const MORE_COMMENTS_QUERY = gql`
   query MoreComments($cursor: String, $limit: Int!) {
     moreComments(cursor: $cursor, limit: $limit) {
-      cursor
+      cursor   ${/*커서가 목록에 요소에 속하지 않으므로 커서는 목록과 별도로 사용됨 */}
       comments {
         id
         author
@@ -132,6 +130,7 @@ const MORE_COMMENTS_QUERY = gql`
   }
 `;
 
+// 사용하는 부분
 function CommentsWithData() {
   const { data, loading, fetchMore } = useQuery(MORE_COMMENTS_QUERY, {
     variables: { limit: 10 },
@@ -152,4 +151,111 @@ function CommentsWithData() {
     />
   );
 }
+```
+
+- moreComments의 구현은 다음과 같다.
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        moreComments: {
+          merge(existing, incoming, { readField }) {
+            const comments = existing ? { ...existing.comments } : {};
+            incoming.comments.forEach((comment) => {
+              comments[readField("id", comment)] = comment;
+            });
+            return {
+              cursor: incoming.cursor,
+              comments,
+            };
+          },
+
+          read(existing) {
+            if (existing) {
+              return {
+                cursor: existing.cursor,
+                comments: Object.values(existing.comments),
+              };
+            }
+          },
+        },
+      },
+    },
+  },
+});
+```
+
+- 커서가 쿼리의 일부로 저장되고 반환되기 때문에 커서의 모호성(ambiguity)이 줄어듬(리스트가 sort되어 cursor로 사용하는 id의 순서가 바뀐다던지 하는 경우)
+
+## Relay-style cursor pagination
+
+- InMemoryCache field policy api는 페이징을 자유롭게 할 수 있다.
+
+- read또는 merge 함수가 가지는 유연성이 없는 graphQL 클라이언트를 설계하는 경우 페이지 분할을 표준화 할 가능성이 높다.
+- Relay와 최대한 호환되도록 Relay 연결 규격을 채택함.
+- Relay 연결을 사용하는것은 커서와 비슷하지만 쿼리 응답 형식이 달라 관리하는 방법이 다르다.
+
+```js
+const COMMENTS_QUERY = gql`
+  query Comments($cursor: String) {
+    comments(first: 10, after: $cursor) {
+      edges {
+        node {
+          author
+          text
+        }
+      }
+      ${/* pageInfo 커서와 next페이지가 있는지 여부가 있음*/}
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+`;
+
+function CommentsWithData() {
+  const { data, loading, fetchMore } = useQuery(COMMENTS_QUERY);
+
+  if (loading) return <Loading />;
+
+  const nodes = data.comments.edges.map((edge) => edge.node);
+  const pageInfo = data.comments.pageInfo;
+
+  return (
+    <Comments
+      entries={nodes}
+      onLoadMore={() => {
+        // hasNextPage 유무에따른 작업
+        if (pageInfo.hasNextPage) {
+          fetchMore({
+            variables: {
+              cursor: pageInfo.endCursor,
+            },
+          });
+        }
+      }}
+    />
+  );
+}
+```
+
+- Relay 패아징은 read 및 merge 함수를 사용하여 아폴로에서 구현 가능
+
+  위의 예제의 edges와 pageInfo를 하나의 재사용 가능한 헬퍼함수로 추상화 할 수 있음을 의미
+
+```js
+import { relayStylePagination } from "@apollo/client/utilities";
+
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        comments: relayStylePagination(),
+      },
+    },
+  },
+});
 ```
