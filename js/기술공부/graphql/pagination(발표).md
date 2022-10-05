@@ -313,20 +313,371 @@ type Query {
 
 ### [Pagination issues](https://www.apollographql.com/docs/react/pagination/key-args#pagination-issues)
 
+- 페이지 목록과 관련된 arguments 특정 arguments로 인해 캐시가 별도의 항목을 저장해서는 안된다.
+
+```graphql
+type Query {
+  feed(offset: Int, limit: Int, category: Category): [FeedItem!]
+}
+```
+
+- offset 및 limit arguments를 사용하면 클라이언트가 가져올 페이지를 지정할 수 있다.
+
+```graphql
+# First query
+query GetFeedItems {
+  feed(offset: 0, limit: 10, category: "SPORTS")
+}
+
+# Second query
+query GetFeedItems {
+  feed(offset: 10, limit: 10, category: "SPORTS")
+}
+```
+
+- 인수 값이 다르기 때문에 별도로 캐시됨.
+- 즉, 두번째 쿼리가 완료되어 반환된 리스트가 첫번째 리스트 뒤에 추가되지 않고 덮어씀
+
+```js
+{
+  'ROOT_QUERY': {
+    // First query
+    'feed({"offset":"0","limit":"10","category":"SPORTS"})': [
+      {
+        '__ref': 'FeedItem:1'
+      },
+      // ...additional items...
+    ],
+    // Second query
+    'feed({"offset":"10","limit":"10","category":"SPORTS"})': [
+      {
+        '__ref': 'FeedItem:11'
+      },
+      // ...additional items...
+    ]
+  }
+}
+```
+
+- 캐시 storage key에 offset또는 limit이 포함되지 않도록 해야함
+- 우리는 캐시가 두 쿼리 결과를 단일 캐시 항목으로 병합하길 원한다.
+- 이 경우를 처리하기 위해 필드에 대한 주요 arguments를 설정 할 수 있다.
+
 ### Setting keyArgs
+
+- keyArgs는 해당 필드에 캐시 storage key에 포함된 graphQL 필드에 대한 arguments 입니다.
+- 특정 필드에 대한 캐시 필드 정책을 정의하여 override 할 수 있다.
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        feed: {
+          keyArgs: ["category"], // category
+        },
+      },
+    },
+  },
+});
+```
+
+- 이렇게 keyArgs를 지정하면 feed는 keyArgs배열을 포함한다.
+
+  이는 캐시가 storage key에 포함해야 하는 모든 인수의 이름을 포함한다.
+
+- keyArgs를 예제와 같이 설정한 후에는 Sports feed에 대한 단일 캐시 엔트리가 생성됩니다(스토리지 키에는 오프셋과 제한이 없음).
+
+```js
+{
+  'ROOT_QUERY': {
+    'feed({"category":"SPORTS"})': [ // offset, limit이 없이 sports만
+      {
+        '__ref': 'FeedItem:1'
+      },
+      // ...additional items from first query...
+      {
+        '__ref': 'FeedItem:11'
+      },
+      // ...additional items from second query...
+    ]
+  }
+}
+```
+
+### 중요: 쿼리와 같은 페이지 목록 필드에 대해 keyArgs를 정의한 후. feed 또한 필드에 대한 merge 함수를 정의해야 합니다. 그렇지 않으면 두 번째 쿼리에 의해 반환된 목록이 첫 번째 목록과 병합되는 대신 덮어씁니다.
 
 ## Supported values for keyArgs
 
+- keyArgs에는 다음과 같은 값이 들어갈 수 있다.
+  - false (필드에 key arguments가 없다는 뜻)
+  - argument, 지시어 및 변수 이름의 배열
+  - 함수
+
 ### keyArgs array
+
+- 캐시된 필드의 storage key는 배열에 포함된 모든 인수, 지시어 및 변수의 값을 사용합니다.
+
+```js
+// arguments 이름
+// category와 id는 필드의 두 arguments입니다.
+["category", "id"];
+
+// subfields 이름
+// details내부의 name과 date를 keyArgs 추가하기
+["details", ["name", "date"]];
+
+// Directive(지시어) 이름 (@과 사용)
+// 하나 이상의 인수가 있는 지시어 이름(선택사항)
+// 필드에 적용할 수 있는 지시어이며 type인수를 가지고 있습니다.
+["@units", ["type"]];
+
+// 변수 이름 ($과 사용)
+["$userId"];
+```
 
 ### keyArgs function (advanced)
 
+- keyArgs에 사용자 지정 함수를 제공하여 필드의 storage key와 다른 형식을 정의 할 수 있다.
+- FieldPolicy API reference에서 심화 학습 가능
+
 ## Which arguments belong in keyArgs?
+
+- keyArgs에 포함할 필드의 arguments를 결정할때 모든 arguments가 있는 것(all arguments)과 없는 것(no arguments)을 고려하여 시작하면 도움이 됨.
+- 이렇게 해놓으면 argument를 추가하거나 제거할 때 용이함.
 
 ### Using all arguments
 
+- 모든 arguments가 키 arguments인 경우(default)
+- 필드에 대한 arguments가 값의 모든 고유한 조합은 고유한 캐시 항목을 생성함.
+- 즉, arguments값을 변경하면 storage key가 달라지므로 별도로 저장됨
+
+```js
+{
+  'ROOT_QUERY': {
+    // First query
+    'feed({"offset":"0","limit":"10","category":"SPORTS"})': [
+      {
+        '__ref': 'FeedItem:1'
+      },
+      // ...additional items...
+    ],
+    // Second query
+    'feed({"offset":"10","limit":"10","category":"SPORTS"})': [
+      {
+        '__ref': 'FeedItem:11'
+      },
+      // ...additional items...
+    ]
+  }
+}
+```
+
+- 이 방법을 사용하면 필드의 모든 arguments가 이전 캐시값과 일치하지 않는 한 캐시된 값을 반환 할 수 없다.
+- 즉 First query, Second query의 arguments가 다르므로 storage key의 값이 달라져 First query 반환된 캐시값을 가져올 수 없음.
+  - 단점 캐시가 일치하는 경우의수가 많이 감소됨
+  - 장점 arguments가 달라지는게 맞을 경우 잘못된 값을 반환하는것을 방지
+
 ### Using no arguments
+
+- keyArgs에 false를 설정한 경우 필드의 storage key는 필드 이름일뿐 argument값은 추가되지 않는다.
+- 즉, 쿼리가 해당 필드의 값을 반환할 때마다 덮어쓰게됨
+
+- 이러한 기본동작을 커스텀 해야할 경우 argument 값을 사용하여 덮어쓰지 않게 merge 및 read 함수로 캐싱값 변경가능
+
+```graphql
+type Query {
+  feed(offset: Int, limit: Int, category: Category): [FeedItem!]
+}
+```
+
+- 아깐 위 예제에 keyArgs category를 설정하여 서로 다른 카테고리의 feed 항목을 별도 유지했다.
+- keyArgs를 false로 설정한 후 다음과 같이 merge와 read 함수를 사용하여 동일하게 만들 수 있다.
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        feed: {
+          keyArgs: false,
+
+          read(existing = {}, { args: { offset, limit, category } }) {
+            return existing[category]?.slice(offset, offset + limit);
+          },
+
+          merge(existing = {}, incoming, { args: { category, offset = 0 } }) {
+            const merged = existing[category]
+              ? existing[category].slice(0)
+              : [];
+            for (let i = 0; i < incoming.length; ++i) {
+              merged[offset + i] = incoming[i];
+            }
+            existing[category] = merged;
+            return existing;
+          },
+        },
+      },
+    },
+  },
+});
+```
+
+- 위 코드에서 merge 및 read 함수에 전달된 existing 값은 feedItem[]다.
+- 이 방식은 keyArgs를 category로 설정하는 것과 같으므로 동작 상 다를것 없다면 위에꺼 쓰자.
 
 ### Summary
 
+- 필드의 데이터를 저장하고 검색하는 로직의 arguments가 다른값에 동일하고 고유한 필드 값이 서로 논리적으로 독립적이면 keyArgs를 쓰자.
+- 기존 필드 데이터를 제한, 필터링, 정렬 또는 가공하는 인수는 일반적으로 keyArgs에 속하지 않는다.
+  - 이런값을 키 Args에 저장하면 Storage key가(고유 값) 다양해져 캐시가 제 역할을 못할수 있기 때문에 지양한다.
+- 일반적으로 read 및 merge 함수는 캐시된 필드 데이터로 거의 모든 작업을 처리 가능, keyArgs는 코드 복잡성이 적은 유사 기능을 제공하기 때문에 read 및 merge의 자유로움 보다 KeyArgs의 제한적이고 선언적인 API를 사용하는것이 좋다.
+
 ## The @connection directive
+
+- connection directive는 아폴로가 지원하는 Relay에서 영감을 받음.
+- 그러나 @connection를 사용하면 서버에 보내는 모든 쿼리에 포함해야 하지만 keyArgs로 구성하면 동일한 효과를 얻을 수 있어 keyArgs를 추천한다.
+
+```js
+const FEED_QUERY = gql`
+  query Feed($category: FeedCategory!, $offset: Int, $limit: Int) {
+    feed(category: $category, offset: $offset, limit: $limit) @connection(
+      key: "feed",
+      filter: ["category"]
+    ) {
+      edges {
+        node { ... }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+`;
+```
+
+@connection없이 위와 완전히 동일한 쿼리는 아래에와 같이 쓸 수 있다.
+
+- Relay 사용방법
+
+  ```js
+  const FEED_QUERY = gql`
+    query Feed($category: FeedCategory!, $offset: Int, $limit: Int) {
+      feed(category: $category, offset: $offset, limit: $limit) {
+        edges {
+          node { ... }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  `;
+  ```
+
+- 그리고 field policy에서 아래처럼 설정한다.
+
+  ```js
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          feed: {
+            keyArgs: ["category"],
+          },
+        },
+      },
+    },
+  });
+  ```
+
+- 그런데 feed에서 category처럼 keyArgs로 사용할 수 있는 arguments가 없다면
+- @connection을 사용하는것이 타당한 방법이다. 아래 예제
+
+```js
+const FEED_QUERY = gql`
+  query Feed($offset: Int, $limit: Int, $feedKey: String) {
+    feed(offset: $offset, limit: $limit) @connection(key: $feedKey) { 
+      edges {
+        node { ... }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+`;
+```
+
+- $feedKey 변수에 다른 값을 사용하여 쿼리를 실행하면 해당 결과는 캐시에 별도로 저장된다(argument가 변하니까).
+- 일반적으로는 동일한 목록에 저장됨
+- 이렇게 keyArgs를 구성할때는 @connection 지시어를 사용해서 InMemoryCache에게 알랴줌.
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        feed: {
+          keyArgs: ["@connection", ["key"]],
+        },
+      },
+    },
+  },
+});
+```
+
+- 위처럼 사용하게 될때 아래처럼 저장됨
+
+```js
+expect(cache.extract()).toEqual({
+  ROOT_QUERY: {
+    __typename: "Query",
+    'feed:{"@connection":{"key":"some feed key"}}': { edges, pageInfo },
+    'feed:{"@connection":{"key":"another feed key"}}': { edges, pageInfo },
+    'feed:{"@connection":{"key":"yet another key"}}': { edges, pageInfo },
+    // ...
+  },
+});
+```
+
+- keyArgs의 key와 @connection의 key는 @connection로 설정한 keyArgs만 고려됨을 의미.
+- @connection에만 키 전달하는것이 적잘하지만 @connection이 아닌 keyArgs로 포함해야 한다면 직접 keyArgs를 써야함
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        feed: {
+          keyArgs: ["someArg", "anotherArg", "@connection", ["key"]],
+        },
+      },
+    },
+  },
+});
+```
+
+- 만약 keyArgs에 없는 arguments가 들어갔을경우 필드키 생성에서 자동으로 생략됨.
+- 모든 경우를 생각하지말고 지시어나 arguments에 keyArgs를 많이 적어주는 것이 안전하다 (사용할 것만 쓰라는말인듯).
+
+- keyArgs 배열이 원하는 필드키를 지정하기에 충분하지 않다면 함수를 전달 할 수 있다.
+- keyArgs 및 @connection은 페이징 처리된 필드보다 더 많은 경우에 유용하다.
+- relayStylePagination는 keyArgs가 false로 구성되어 있어 relayStylePagination에 인자를 전달하여 keyArgs를 재구성 할 수 있다.
+
+```js
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        feed: relayStylePagination(["type", "@connection", ["key"]]),
+      },
+    },
+  },
+});
+```
+
+- relayStylePagination에 인자를 전달하여 keyArgs를 커스텀 할 수 있다.
