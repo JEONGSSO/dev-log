@@ -64,11 +64,11 @@ const cache = new InMemoryCache({
 });
 ```
 
-- id필드를 변경하지 않고 추가,제거 또는 이동할 수 있기 때문에 이 페이징 전략은 offset 기반 전략보다
+- id필드를 변경하지 않고 추가,제거 또는 이동할 수 있기 때문에 커서를 사용하는 방법은 offset 기반 전략보다
 
   mutation에 더 유연하게 대처 할 수 있다.
 
-- 그러나 이 전략은 병합 기능이 기존데이터에 새 페이지를 추가할 때(무한스크롤, fetchMore 같은 상황) 유용하게 사용 할 수 있다.
+- merge 함수를 사용하여 기존데이터에 새 페이지를 추가할 때(무한스크롤, fetchMore 같은 상황) 유용하게 사용 할 수 있다.
 
   커서가 기존 데이터의 중간에 있는 경우는 사용하기 어려운 전략이다. (데이터 덮어쓰기 주의해야 하기 때문)
 
@@ -88,7 +88,7 @@ const cache = new InMemoryCache({
           merge(existing, incoming, { readField }) {
             const merged = { ...existing };
             incoming.forEach((item) => {
-              merged[readField("id", item)] = item;
+              merged[readField("id", item)] = item; // 일치하는 id만 바꿔주기
             });
             return merged;
           },
@@ -107,7 +107,7 @@ const cache = new InMemoryCache({
 
 - 이렇게 동일한 ID필드를 가진 항목만 대체 할 수 있다.
 - 그러나 이 방식은 다음페이지 요청시에 어떤 커서를 사용해야 하는지에 대해 생각해봐야함
-  - 지금 같은 상황에서는 id필드를 다음 요청 커서로 사용할 수 있다.
+  - 위 같은 상황에서는 ID필드를 다음 요청 커서로 사용할 수 있다.
 
 ## 커서를 항목과 별개로 유지
 
@@ -167,7 +167,7 @@ const cache = new InMemoryCache({
               comments[readField("id", comment)] = comment;
             });
             return {
-              cursor: incoming.cursor,
+              cursor: incoming.cursor, // incoming의 cursor를 사용
               comments,
             };
           },
@@ -191,11 +191,8 @@ const cache = new InMemoryCache({
 
 ## Relay-style cursor pagination
 
-- InMemoryCache field policy api는 페이징을 자유롭게 할 수 있다.
-
-- read또는 merge 함수가 가지는 유연성이 없는 graphQL 클라이언트를 설계하는 경우 페이지 분할을 표준화 할 가능성이 높다.
 - Relay와 최대한 호환되도록 Relay 연결 규격을 채택함.
-- Relay 연결을 사용하는것은 커서와 비슷하지만 쿼리 응답 형식이 달라 관리하는 방법이 다르다.
+- Relay 연결을 사용하는것은 cursor와 비슷하지만 쿼리 형식이 다르다. 아래에
 
 ```js
 const COMMENTS_QUERY = gql`
@@ -242,9 +239,11 @@ function CommentsWithData() {
 }
 ```
 
-- Relay 패아징은 read 및 merge 함수를 사용하여 아폴로에서 구현 가능
+- Relay 페이징은 read 및 merge 함수를 사용하여 apollo client에서 구현 가능
 
-  위의 예제의 edges와 pageInfo를 하나의 재사용 가능한 헬퍼함수로 추상화 할 수 있음을 의미
+  위의 예제의 edges와 pageInfo를 재사용 가능하게 헬퍼함수를 만들어 놓았음.
+
+  https://github.com/apollographql/apollo-client/blob/main/src/utilities/policies/pagination.ts#L95
 
 ```js
 import { relayStylePagination } from "@apollo/client/utilities";
@@ -260,25 +259,21 @@ const cache = new InMemoryCache({
 });
 ```
 
-https://github.com/apollographql/apollo-client/blob/main/src/utilities/policies/pagination.ts#L95
-
-헬퍼 함수 relayStylePagination 만들어 두었음.
-
 https://relay.dev/docs/guides/graphql-server-specification/#further-reading
 
 실제로 Relay에서 edges, pageInfo를 사용하는 예제
 
 - relayStylePagination는
-  - Apollo Client를 사용하여 릴레이 pagination api를 사용 할 때 relayStylePagination는 처음으로 고려해볼만한 좋은 헬퍼함수이다.
-  - relayStylePagation함수는 Args를 무시하고, 사용가능 데이터를 반환하는 read 함수로 필드 정책을 생성함.
-  - fetchMore에서 relayStylePagation를 더 쉽게 사용 가능함.
+  - Apollo Client를 사용하여 Relay Pagination api를 사용 할 때 relayStylePagination는 처음으로 고려해볼만한 좋은 헬퍼함수이다.
+  - 사용가능 데이터를 반환하는 read 함수로 필드 정책을 생성함.
+  - fetchMore에서 더 쉽게 사용 가능함.
   - Non-paginated read function임
-    - offset, limit 인수를 무시하도록 선택할 수 있고
+    - offset, limit arguments를 무시하도록 선택할 수 있고
     - 캐시에 있는대로 전체 목록을 반환함.
 
 # Key arguments in Apollo Client
 
-- keyArgs 구성과 관련된 고려 사항에 대해 알아보기 전에 Corepagation API를 읽는 것이 좋습니다.
+- keyArgs 구성과 관련된 고려 사항에 대해 알아보기 전에 Core Pagination API를 읽는 것이 좋습니다.
 
 - Apollo Client 캐시는 단일 스키마 필드에 대해 여러 항목을 저장할 수 있습니다.
 
@@ -292,28 +287,28 @@ type Query {
 ```js
 {
   'ROOT_QUERY': {
-    'user({"id":"1"})': {
-      '__ref': 'User:1' // storage key
+    'user({"id":"1"})': { // storage key
+      '__ref': 'User:1'
     },
-    'user({"id":"2"})': {
-      '__ref': 'User:2' // storage key
+    'user({"id":"2"})': { // storage key
+      '__ref': 'User:2'
     }
   }
 }
 ```
 
-- 위에 표시된 것처럼 각 항목의 storage key에는 해당 인수 값이 포함됩니다.
+- 위에 표시된 것처럼 각 항목의 storage key에는 해당 arguments 값(ID 1,2)이 포함됩니다.
 
-  즉, 필드의 인수가 쿼리 간에 다르면 storage key도 다르고, 고유한 캐시 항목을 생성합니다.
+  즉, 필드의 arguments가 쿼리 간에 다르면 storage key도 다르고, 고유한 캐시 항목을 생성합니다.
 
-- 인수가 없으면 storage key 해당필드 이름만 됨 ex) '\_\_ref': 'User'
+- arguments가 없으면 storage key 해당필드 이름만 됨 ex) '\_\_ref': 'User'
 
-- 캐시는 데이터를 날리지 않고 서로 다른 인수 조합(id 1, 2)에 대해 반환된 값을 병합할 수 있는지 여부를 알 수 없다.
+- 캐시는 데이터를 날리지 않고 서로 다른 arguments 조합(id 1, 2)에 대해 반환된 값을 병합할 수 있는지 여부를 알 수 없다.
 - 그러므로 캐시는 ID 1과 2의 User에 대한 쿼리 결과를 병합해서는 안된다.
 
 ### [Pagination issues](https://www.apollographql.com/docs/react/pagination/key-args#pagination-issues)
 
-- 페이지 목록과 관련된 arguments 특정 arguments로 인해 캐시가 별도의 항목을 저장해서는 안된다.
+- 페이징과 관련된 특정 arguments로 인해 캐시가 별도의 항목을 저장해서는 안된다. (offset, limit, cursor 등)
 
 ```graphql
 type Query {
@@ -335,7 +330,7 @@ query GetFeedItems {
 }
 ```
 
-- 인수 값이 다르기 때문에 별도로 캐시됨.
+- arguments 값이 다르기 때문에(offset) 별도로 캐시됨.
 - 즉, 두번째 쿼리가 완료되어 반환된 리스트가 첫번째 리스트 뒤에 추가되지 않고 덮어씀
 
 ```js
@@ -361,7 +356,7 @@ query GetFeedItems {
 
 - 캐시 storage key에 offset또는 limit이 포함되지 않도록 해야함
 - 우리는 캐시가 두 쿼리 결과를 단일 캐시 항목으로 병합하길 원한다.
-- 이 경우를 처리하기 위해 필드에 대한 주요 arguments를 설정 할 수 있다.
+- 이 경우를위해 필드에 대한 주요 arguments를 설정 할 수 있다.
 
 ### Setting keyArgs
 
@@ -384,7 +379,7 @@ const cache = new InMemoryCache({
 
 - 이렇게 keyArgs를 지정하면 feed는 keyArgs배열을 포함한다.
 
-  이는 캐시가 storage key에 포함해야 하는 모든 인수의 이름을 포함한다.
+  이는 캐시가 storage key에 포함해야 하는 모든 arguments의 이름을 포함한다.
 
 - keyArgs를 예제와 같이 설정한 후에는 Sports feed에 대한 단일 캐시 엔트리가 생성됩니다(스토리지 키에는 오프셋과 제한이 없음).
 
@@ -405,7 +400,11 @@ const cache = new InMemoryCache({
 }
 ```
 
-### 중요: 쿼리와 같은 페이지 목록 필드에 대해 keyArgs를 정의한 후. feed 또한 필드에 대한 merge 함수를 정의해야 합니다. 그렇지 않으면 두 번째 쿼리에 의해 반환된 목록이 첫 번째 목록과 병합되는 대신 덮어씁니다.
+### 중요: 같은 페이지 목록 필드에 대해 keyArgs를 정의한 후 feed 또한 필드에 대한 merge 함수를 정의하지 않으면
+
+### 두 번째 쿼리에 의해 반환된 목록이 첫 번째 목록과 병합되는 대신 덮어씀
+
+---
 
 ## Supported values for keyArgs
 
@@ -416,7 +415,7 @@ const cache = new InMemoryCache({
 
 ### keyArgs array
 
-- 캐시된 필드의 storage key는 배열에 포함된 모든 인수, 지시어 및 변수의 값을 사용합니다.
+- 캐시된 필드의 storage key는 배열에 포함된 모든 arguments, 지시어 및 변수의 값을 사용합니다.
 
 ```js
 // arguments 이름
@@ -428,8 +427,8 @@ const cache = new InMemoryCache({
 ["details", ["name", "date"]];
 
 // Directive(지시어) 이름 (@과 사용)
-// 하나 이상의 인수가 있는 지시어 이름(선택사항)
-// 필드에 적용할 수 있는 지시어이며 type인수를 가지고 있습니다.
+// 하나 이상의 arguments가 있는 지시어 이름(선택사항)
+// 필드에 적용할 수 있는 지시어이며 typearguments를 가지고 있습니다.
 ["@units", ["type"]];
 
 // 변수 이름 ($과 사용)
@@ -439,7 +438,7 @@ const cache = new InMemoryCache({
 ### keyArgs function (advanced)
 
 - keyArgs에 사용자 지정 함수를 제공하여 필드의 storage key와 다른 형식을 정의 할 수 있다.
-- FieldPolicy API reference에서 심화 학습 가능
+- FieldPolicy API reference에 자세히 나와있음
 
 ## Which arguments belong in keyArgs?
 
@@ -529,7 +528,7 @@ const cache = new InMemoryCache({
 ### Summary
 
 - 필드의 데이터를 저장하고 검색하는 로직의 arguments가 다른값에 동일하고 고유한 필드 값이 서로 논리적으로 독립적이면 keyArgs를 쓰자.
-- 기존 필드 데이터를 제한, 필터링, 정렬 또는 가공하는 인수는 일반적으로 keyArgs에 속하지 않는다.
+- 기존 필드 데이터를 제한, 필터링, 정렬 또는 가공하는 arguments는 일반적으로 keyArgs에 속하지 않는다.
   - 이런값을 키 Args에 저장하면 Storage key가(고유 값) 다양해져 캐시가 제 역할을 못할수 있기 때문에 지양한다.
 - 일반적으로 read 및 merge 함수는 캐시된 필드 데이터로 거의 모든 작업을 처리 가능, keyArgs는 코드 복잡성이 적은 유사 기능을 제공하기 때문에 read 및 merge의 자유로움 보다 KeyArgs의 제한적이고 선언적인 API를 사용하는것이 좋다.
 
