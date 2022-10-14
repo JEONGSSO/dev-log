@@ -303,8 +303,8 @@ type Query {
 
 - arguments가 없으면 storage key 해당필드 이름만 됨 ex) '\_\_ref': 'User'
 
-- 캐시는 데이터를 날리지 않고 서로 다른 arguments 조합(id 1, 2)에 대해 반환된 값을 병합할 수 있는지 여부를 알 수 없다.
-- 그러므로 캐시는 ID 1과 2의 User에 대한 쿼리 결과를 병합해서는 안된다.
+- 이러한 기본동작은 캐시가 덮어질 수 있는 가능성이 있으므로 안전을 위한 것
+- 캐시는 서로 다른 arguments 조합(id 1, 2)에 대해 반환된 값을 병합할 수 있는지 여부를 알 수 없기때문에 두개의 쿼리 결과를 병합해서는 안됨.
 
 ### [Pagination issues](https://www.apollographql.com/docs/react/pagination/key-args#pagination-issues)
 
