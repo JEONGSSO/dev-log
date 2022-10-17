@@ -13,17 +13,18 @@ npx create-react-app app --typescript
 import React from "react";
 
 type TodoListProps = {
-  todos: {
-    id: number;
-    text: string;
-  };
+  todos: Todo[];
+  onDeleteTodo: (todoId: string) => void;
 };
 
-const TodoList = ({ todos }: TodoListProps) => {
+const TodoList = ({ todos, onDeleteTodo }: TodoListProps) => {
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
+        <li key={todo.id}>
+          <p>{todo.text}</p>
+          <button onClick={onDeleteTodo}>X</button>
+        </li>
       ))}
     </ul>
   );
@@ -36,18 +37,14 @@ export default TodoList;
 // NewTodo.tsx
 import React, { useRef } from "react";
 
-type NewTodoProps = {
-  todos: {
-    id: number;
-    text: string;
-  };
-};
+type NewTodoProps = {};
 
-const NewTodo = () => {
+const NewTodo = ({}: NewTodoProps) => {
   const inputElem = useRef<HTMLInputElement>(null);
 
   const todoSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+    // Definite Assignment Assertions current가 렌더링 된 후에야 실행이 가능한 코드이므로 HTMLInputElement를 확신할 수 있기에 적용
     const enteredText = inputElem.current!.value;
   };
 
@@ -63,4 +60,29 @@ const NewTodo = () => {
 };
 
 export default NewTodo;
+```
+
+```tsx
+// App.tsx
+
+export type Todo = { id: string; todo: string };
+
+const App = () => {
+  const [todos, setTodos] = useState<Todo[]>([{ id: 1, todo: "todo" }]);
+
+  const todoAddHandler = (todo: string) => {
+    setTodos((prev) => [...prev, { id: Math.random.toString(), todo: todo }]);
+  };
+
+  const todoAddHandler = (todoId: string) => {
+    setTodos.filter((todo) => todo.id !== todoId);
+  };
+
+  return (
+    <div>
+      <NewTodo onAddTodo={todoAddHandler} />
+      <TodoList todoItem={todos} onDeleteTodo={todoAddHandler} />
+    </div>
+  );
+};
 ```
