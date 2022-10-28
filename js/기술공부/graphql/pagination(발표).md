@@ -537,7 +537,7 @@ const cache = new InMemoryCache({
 ## The @connection directive
 
 - connection directive는 아폴로가 지원하는 Relay에서 영감을 받음.
-- 그러나 @connection를 사용하면 서버에 보내는 모든 쿼리에 포함해야 하지만 keyArgs로 구성하면 동일한 효과를 얻을 수 있어 keyArgs를 추천한다.
+- 그러나 @connection를 사용하면 쿼리에 @connection를 매번 작성해주어야 하기때문에 keyArgs로 구성하면 동일한 효과를 얻을 수 있어 keyArgs를 추천한다.
 
 ```js
 const FEED_QUERY = gql`
