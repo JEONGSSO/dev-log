@@ -193,17 +193,19 @@ This means our type better be nullable, or else we risk nulling out a lot more o
 
 ## Blocking Introspection (스키마 확인 방어..?)
 
+- Introspection은 graphql 공식 번역문서에 스키마 확인이라고 번역이 되어있는데, 스키마에 대한 정보를 요청하는것
+
 One of the most popular concerns I see around securing GraphQL APIs is removing introspection capabilities from a server.
 
-- GraphQl을 보안과 관련하여 내가 우려하는것중 하나는 서버에서 스키마 확인 기능을 제거하는것..?
+- GraphQl API 보안과 관련하여 가장 일반적인 문제 중 하나는 서버에서 Introspection 기능을 제거하는것이다.
 
 This is generally a bit odd to me since that’s one of the reasons that make a GraphQL API so great to use.
 
-- 이것은 GraphQL API를 사용하는 좋은 이유 중 하나이기때문에 앞뒤가 안맞는다.
+- 이것은 GraphQL API를 사용하는 좋은 이유 중 하나이기 때문에 제거하는것은 이상하다
 
 But of course, that depends on the context behind using that GraphQL API.
 
-- 하지만 Graphql api를 사용하기 나름이다
+- 물론 Graphql api를 사용하는 환경 나름이긴하지만.
 
 Internal APIs that want to hide upcoming features, especially if they’re accessible through something public like a browser might need to limit introspection to avoid leaking secret things.
 
@@ -211,7 +213,7 @@ Internal APIs that want to hide upcoming features, especially if they’re acces
 
 Internal APIs may also want to use query whitelisting, a process in which a GraphQL server only allows a known set of queries to be executed, often registered beforehand.
 
-- GraphQl서버가 인가된 쿼리 세트만 실행할 수 있는 프로세스는 사전 등록된다.
+- GraphQl서버가 인가된 쿼리 세트만 실행하도록 허용하는 프로세스인 화이트 리스트를 사용하기 원할 수 있다.
 
 This can often be used for private APIs that are used by client-side apps to block anyone from executing other queries than the ones the client makes.
 
@@ -223,11 +225,11 @@ Introspection is before all a tool for engineers/developers, not end users.
 
 This means it should be enabled in development, but there is no need to leave it open in production for an internal API.
 
-- 개발 모드에서만 활성화되어야 한다는 것을 의미합니다.
+- prod단계에서 개방된 상태로 둘 필요없이 개발 모드에서 활성화되어야 한다는 것을 의미합니다.
 
 For public GraphQL API though, there is nothing inherently insecure about introspection since the schema is what we actually want to expose.
 
-- 공개 GraphQl API의 경우 실제로 노출하고자 하는 목적이 있기때문에 스키마 확인에 본질적으로 안전하지는 않다.
+- public GraphQl API의 경우 실제로 노출하고자 하는 목적이 있기때문에 스키마 확인(introspection)에 본질적으로 안전하지는 않다.
 
 Limiting introspection in those cases oddly sounds like “Security by obscurity"
 
@@ -235,7 +237,7 @@ Limiting introspection in those cases oddly sounds like “Security by obscurity
 
 For types and fields that should not be discovered, for example feature flags
 
-- 검색하면 안되는 유형 및 필드의 경우 (이전에 책에서 다룬 기능 플래그)
+- 이전에 예로 든 feature flags 같이, 검색하면 안되는 유형 및 필드의 경우
 
 we’ve covered earlier in the book I prefer using schema visibility (which we’ve covered in Chapter 2)
 
@@ -246,13 +248,12 @@ This allows us to hide certain parts of our schema to certain clients only.
 - 이를 통해 특정 클라이언트에 대해서만 스키마의 특정 부분을 숨길 수 있다.
 
 If you don’t have these two things in place and they require too much effort, limiting introspection can be used as a simpler measure.
-QQQQ
 
-- 만약 이 두가지(visibility랑 ??)를 제대로 갖추지 못했고 너무 많은 노력을 필요로 한다면 스키마 확인을 더 간단한 측정으로 사용할 수 있습니다.
+- 만약 이 두가지(visibility랑 ??)를 제대로 갖추지 못했고 너무 많은 노력을 필요로 한다면 스키마 확인 제한하는것은 더 간단한 방법으로 사용할 수 있다.
 
 However, keep in mind you might be restricting a very important feature for clients and tools.
 
-- 그러나 클라이언트 및 툴의 매우 중요한 기능을 제한할 수 있습니다.
+- 클라이언트 및 툴의 매우 중요한 기능을 제한할 수 있습니다.
 
 ### Persisted Queries (지속된 쿼리)
 
@@ -274,7 +275,7 @@ Let’s say this client was deployed to production.
 
 One thing we notice is that the query string the client sends never changes.
 
-- 클라이언트가 보내는 쿼리 문자열은 변경 되지 않습니다.
+- 클라이언트가 보내는 쿼리 문자열은 변경 되지 않습니다. (개발자 도구에서 payload탭 query를 보게되면 항상같은 문자열을 보낸다는 뜻 같다)
 
 In fact, sending the entire query to the server every time is totally useless!
 
@@ -298,7 +299,7 @@ Sometimes these queries are registered before or during the deploy process.
 
 In other cases, the first query from a client is used as the “registration”.
 
-- 다른 경우에는 클라이언트의 첫 번째 쿼리가 "등록"으로 사용됨
+- 다른 경우에는 클라이언트의 첫 번째 쿼리가 등록됨
 
 In exchange, a GraphQL server capable of supporting persisted queries will provide the client with an identifier for that query
 
@@ -314,7 +315,7 @@ Once the client has the identifier for a particular query, it can send the ident
 
 For example, if the server returned an URL after the registration of a certain query, the client could use this URL instead of sending the query document every single time
 
-- 예를 들어 서버가 특정 쿼리를 등록 후 URL을 반환한 경우, 클라이언트는 매번 질의문서를 방송하는 대신 이 URL을 사용할 수 있습니다.
+- 예를 들어 서버가 특정 쿼리를 등록 후 URL을 반환한 경우, 클라이언트는 매번 질의문서를 발송하는 대신 이 URL을 사용할 수 있습니다.
 
 This has several amazing advantages.
 

@@ -1,3 +1,5 @@
+스크롤
+
 ```js
 let currentScrollY = 5;
 const headerEl = document.querySelector("#header");
