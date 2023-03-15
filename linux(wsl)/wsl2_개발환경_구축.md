@@ -236,3 +236,16 @@ wslconfig.exe /u Ubuntu # 삭제
 https://lahuman.github.io/wsl_uninstall/
 
 ---
+
+## JavaScript heap out of memory
+
+zsh를 사용하고 있어
+
+.zshrc 파일에 작성
+
+```bash
+export NODE_OPTIONS=--max-old-space-size=4096
+
+```
+
+.zshrc 소스실행하면 적용 완료.
